@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { BsCart4 } from "react-icons/bs";
 
 import * as S from "./style";
 
 function Header() {
+  const router = useRouter();
   return (
     <S.Wrapper>
       <S.Container>
