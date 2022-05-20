@@ -1,10 +1,11 @@
-import Counter from "@/components/counter";
+import Counter from "@/components/Counter";
+import Layout from "@/components/Layout";
 
 function HomePage() {
   return (
-    <div>
+    <Layout>
       <Counter />
-    </div>
+    </Layout>
   );
 }
 

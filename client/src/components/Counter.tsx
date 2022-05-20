@@ -1,4 +1,3 @@
-import React from "react";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { decrement, increment } from "@/app/features/counter/counterSlice";
 
