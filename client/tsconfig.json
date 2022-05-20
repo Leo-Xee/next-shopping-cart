@@ -19,6 +19,7 @@
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
