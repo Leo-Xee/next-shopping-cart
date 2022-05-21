@@ -1,11 +1,5 @@
-import Layout from "@/components/Layout";
-
 function Cart() {
-  return (
-    <Layout>
-      <div>cart</div>;
-    </Layout>
-  );
+  return <div>cart</div>;
 }
 
 export default Cart;

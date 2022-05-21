@@ -1,11 +1,5 @@
-import Layout from "@/components/Layout";
-
 function Order() {
-  return (
-    <Layout>
-      <div>order</div>
-    </Layout>
-  );
+  return <div>order</div>;
 }
 
 export default Order;
