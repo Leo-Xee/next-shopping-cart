@@ -43,6 +43,10 @@
     "no-param-reassign": 0,
     "no-restricted-exports": 0,
     "jsx-a11y/anchor-is-valid": 0,
-    "import/no-extraneous-dependencies": 0
+    "import/no-extraneous-dependencies": 0,
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      { "checksVoidReturn": false }
+    ]
   }
 }
