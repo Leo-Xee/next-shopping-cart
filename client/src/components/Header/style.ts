@@ -26,11 +26,12 @@ export const Left = styled.div`
   & span {
     position: absolute;
     top: -1px;
+    left: 10px;
   }
 
-  & a {
+  & button {
     font-weight: 700;
-    margin-left: 50px;
+    margin-left: 60px;
     padding: 5px;
   }
 `;
@@ -38,7 +39,7 @@ export const Right = styled.div`
   font-size: 2rem;
   color: ${({ theme }) => theme.light.white};
 
-  & a {
+  & button {
     margin-right: 20px;
     padding: 5px;
   }

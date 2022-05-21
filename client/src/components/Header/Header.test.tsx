@@ -1,52 +1,57 @@
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import userEvent from "@testing-library/user-event";
-import React from "react";
+import { NextRouter } from "next/router";
 import createMockRouter from "@/test-utils/createMockRouter";
 import Header from "./Header";
-import { render, screen } from "@/test-utils/custom";
+import { render } from "@/test-utils/custom";
+
+const renderHeader = (mockedRouter: NextRouter) => {
+  const result = render(
+    <RouterContext.Provider value={mockedRouter}>
+      <Header />
+    </RouterContext.Provider>
+  );
+
+  const homeButton = () => result.getByRole("button", { name: "WOOWA SHOP" });
+  const cartButton = () => result.getByRole("button", { name: "장바구니" });
+  const orderButton = () => result.getByRole("button", { name: "주문목록" });
+
+  return { homeButton, cartButton, orderButton };
+};
 
 describe("<Header />", () => {
   it("로고, 장바구니, 주문목록을 보여준다.", () => {
-    render(<Header />);
+    const router = createMockRouter({});
+    const { homeButton, cartButton, orderButton } = renderHeader(router);
 
-    const title = screen.getByText(/WOOWA SHOP/i);
-    const cart = screen.getByText("장바구니");
-    const order = screen.getByText("주문목록");
-
-    expect(title).toBeInTheDocument();
-    expect(cart).toBeInTheDocument();
-    expect(order).toBeInTheDocument();
+    expect(homeButton()).toBeInTheDocument();
+    expect(cartButton()).toBeInTheDocument();
+    expect(orderButton()).toBeInTheDocument();
   });
 
-  describe("Routing", () => {
-    beforeEach(() => {
+  describe("버튼을 클릭하면 다른 페이지로 이동한다.", () => {
+    it("로고를 클릭하면 '/'로 이동한다.", async () => {
       const router = createMockRouter({});
-      render(
-        <RouterContext.Provider value={router}>
-          <Header />
-        </RouterContext.Provider>
-      );
+      const { homeButton } = renderHeader(router);
+
+      await userEvent.click(homeButton());
+      expect(router.push).toHaveBeenCalledWith("/");
     });
 
-    it("로고를 클릭하면 '/'로 페이지 이동한다.", async () => {
-      const title = screen.getByText(/WOOWA SHOP/i);
+    it("장바구니를 클릭하면 '/cart'로 이동한다.", async () => {
+      const router = createMockRouter({});
+      const { cartButton } = renderHeader(router);
 
-      await userEvent.click(title);
-      expect(title).toHaveAttribute("href", "/");
+      await userEvent.click(cartButton());
+      expect(router.push).toHaveBeenCalledWith("/cart");
     });
 
-    it("장바구니를 클릭하면 '/cart'로 페이지 이동한다.", async () => {
-      const cart = screen.getByText("장바구니");
+    it("주문목록를 클릭하면 '/order'로 이동한다.", async () => {
+      const router = createMockRouter({});
+      const { orderButton } = renderHeader(router);
 
-      await userEvent.click(cart);
-      expect(cart).toHaveAttribute("href", "/cart");
-    });
-
-    it("주문목록를 클릭하면 '/order'로 페이지 이동한다.", async () => {
-      const order = screen.getByText("주문목록");
-
-      await userEvent.click(order);
-      expect(order).toHaveAttribute("href", "/order");
+      await userEvent.click(orderButton());
+      expect(router.push).toHaveBeenCalledWith("/order");
     });
   });
 });

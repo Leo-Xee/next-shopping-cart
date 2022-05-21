@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsCart4 } from "react-icons/bs";
 
@@ -13,17 +12,17 @@ function Header() {
           <span>
             <BsCart4 size={40} color="#ffffff" />
           </span>
-          <Link href="/">
-            <a>WOOWA SHOP</a>
-          </Link>
+          <button type="button" onClick={() => router.push("/")}>
+            WOOWA SHOP
+          </button>
         </S.Left>
         <S.Right>
-          <Link href="/cart">
-            <a>장바구니</a>
-          </Link>
-          <Link href="/order">
-            <a>주문목록</a>
-          </Link>
+          <button type="button" onClick={() => router.push("/cart")}>
+            장바구니
+          </button>
+          <button type="button" onClick={() => router.push("/order")}>
+            주문목록
+          </button>
         </S.Right>
       </S.Container>
     </S.Wrapper>
