@@ -1,9 +1,9 @@
-import Counter from "@/components/Counter";
+import ProductsList from "@/components/ProductList";
 
 function HomePage() {
   return (
     <div>
-      <Counter />
+      <ProductsList />
     </div>
   );
 }
