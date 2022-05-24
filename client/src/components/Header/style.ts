@@ -5,6 +5,7 @@ export const Wrapper = styled.header`
   width: 100%;
   height: 80px;
   background-color: ${({ theme }) => theme.light.primary};
+  z-index: 100;
 `;
 
 export const Container = styled.div`
