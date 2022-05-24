@@ -7,7 +7,7 @@ type LayoutProps = {
 
 const Container = styled.div`
   margin: 0 auto;
-  padding: 120px 0;
+  padding: 120px 20px;
   max-width: ${({ theme }) => theme.light.maxWidth};
   min-width: ${({ theme }) => theme.light.minWidth};
 `;
