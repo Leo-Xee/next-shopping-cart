@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import getAllProducts from "@/api/products";
 import { Product } from "@/@types/dto";
+import productService from "@/services/productService";
 
 type ProductsState = {
   status: "idle" | "loading" | "success" | "failed";
@@ -12,10 +12,10 @@ const initialState: ProductsState = {
   products: [],
 };
 
-export const getProducts = createAsyncThunk<Product[], void>(
-  "products/getProducts",
+export const getAllProducts = createAsyncThunk<Product[], void>(
+  "products/getAllProducts",
   async () => {
-    const data = await getAllProducts();
+    const data = await productService.getAllProducts();
     return data;
   }
 );
@@ -26,14 +26,14 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getProducts.pending, (state) => {
+      .addCase(getAllProducts.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getProducts.fulfilled, (state, { payload }) => {
+      .addCase(getAllProducts.fulfilled, (state, { payload }) => {
         state.status = "success";
         state.products = payload;
       })
-      .addCase(getProducts.rejected, (state) => {
+      .addCase(getAllProducts.rejected, (state) => {
         state.status = "failed";
       });
   },

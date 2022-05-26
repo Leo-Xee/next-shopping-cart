@@ -1,4 +1,4 @@
-import { filterName, filterPrice } from "@/utils/filter";
+import { filterName, filterPrice } from "@/shared/utils/filter";
 
 const longName = "젓가락(종이)-웬만해선 이 맛을 막을 수 없다";
 const bigNumber = 1000000000000;

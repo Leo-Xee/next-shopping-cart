@@ -1,6 +1,6 @@
 import { Product } from "@/@types/dto";
-import { filterName, filterPrice } from "@/utils/filter";
-import { render, screen } from "@/utils/test-utils";
+import { filterName, filterPrice } from "@/shared/utils/filter";
+import { render, screen } from "@/shared/utils/test-utils";
 import ProductsList from "./ProductList";
 
 const renderProducts = async (product: Omit<Product, "id" | "imageUrl">) => {

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { Product } from "@/@types/dto";
 import * as S from "./style";
-import { filterName, filterPrice } from "@/utils/filter";
+import { filterName, filterPrice } from "@/shared/utils/filter";
 
 type ProductItemProps = {
   data: Product;

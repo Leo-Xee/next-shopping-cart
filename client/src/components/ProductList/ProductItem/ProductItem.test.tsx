@@ -1,6 +1,6 @@
 import { Product } from "@/@types/dto";
-import { filterName, filterPrice } from "@/utils/filter";
-import { render } from "@/utils/test-utils";
+import { filterName, filterPrice } from "@/shared/utils/filter";
+import { render } from "@/shared/utils/test-utils";
 import ProductItem from "./ProductItem";
 
 const product = {

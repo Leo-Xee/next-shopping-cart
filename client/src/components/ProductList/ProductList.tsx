@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { getProducts } from "@/app/features/products/productsSlice";
+import { getAllProducts } from "@/app/features/products/productsSlice";
 import ProductItem from "./ProductItem";
 
 const Container = styled.div`
@@ -18,7 +18,7 @@ function ProductsList() {
 
   // SSR 적용 시에 index의 getStaticProps에서 dispatch
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getAllProducts());
   }, [dispatch]);
 
   return (

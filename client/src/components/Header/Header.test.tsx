@@ -1,9 +1,9 @@
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import userEvent from "@testing-library/user-event";
 import { NextRouter } from "next/router";
-import createMockRouter from "@/utils/createMockRouter";
+import createMockRouter from "@/shared/utils/createMockRouter";
 import Header from "./Header";
-import { render } from "@/utils/test-utils";
+import { render } from "@/shared/utils/test-utils";
 
 const renderHeader = (mockedRouter: NextRouter) => {
   const result = render(
