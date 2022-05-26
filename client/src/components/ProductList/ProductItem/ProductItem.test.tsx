@@ -1,4 +1,5 @@
 import { Product } from "@/@types/dto";
+import { filterName, filterPrice } from "@/utils/filter";
 import { render } from "@/utils/test-utils";
 import ProductItem from "./ProductItem";
 
@@ -13,13 +14,16 @@ const product = {
 const renderProductItem = (productItem: Product) => {
   const result = render(<ProductItem data={productItem} />);
 
-  const name = () => result.getByText("젓가락(종이)-웬만해선 이 맛을 막을 ...");
-  const price = () => result.getByText("21,800원");
+  const name = () => result.getByText(filterName(productItem.name));
+  const price = () => result.getByText(`${filterPrice(21800)}원`);
   const image = () =>
     result.getByRole("img", {
       name: "젓가락(종이)-웬만해선 이 맛을 막을 수 없다",
     });
-  const cartButton = () => result.getByRole("button", { name: "cartButton" });
+  const cartButton = () =>
+    result.getByRole("button", {
+      name: `젓가락(종이)-웬만해선 이 맛을 막을 수 없다 장바구니에 담기`,
+    });
 
   return { result, name, price, image, cartButton };
 };
@@ -46,6 +50,4 @@ describe("<ProductItem />", () => {
       expect(cartButton()).toBeInTheDocument();
     });
   });
-
-  // it("장바구니 버튼을 클릭하면 장바구니에 상품이 추가된다.", () => {});
 });
