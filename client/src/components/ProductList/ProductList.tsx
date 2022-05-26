@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { getAllProducts } from "@/app/features/products/productsSlice";
+import { getAllProducts } from "@/app/features/products/productSlice";
 import ProductItem from "./ProductItem";
 
 const Container = styled.div`

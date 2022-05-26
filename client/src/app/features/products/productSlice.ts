@@ -2,26 +2,26 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Product } from "@/@types/dto";
 import productService from "@/services/productService";
 
-type ProductsState = {
+type ProductState = {
   status: "idle" | "loading" | "success" | "failed";
   products: Product[];
 };
 
-const initialState: ProductsState = {
+const initialState: ProductState = {
   status: "idle",
   products: [],
 };
 
 export const getAllProducts = createAsyncThunk<Product[], void>(
-  "products/getAllProducts",
+  "product/getAllProducts",
   async () => {
     const data = await productService.getAllProducts();
     return data;
   }
 );
 
-const productsSlice = createSlice({
-  name: "products",
+const productSlice = createSlice({
+  name: "product",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -39,4 +39,4 @@ const productsSlice = createSlice({
   },
 });
 
-export default productsSlice.reducer;
+export default productSlice.reducer;
