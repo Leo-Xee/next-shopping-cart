@@ -1,8 +1,6 @@
-import { useEffect } from "react";
 import styled from "@emotion/styled";
+import { useGetProductsQuery } from "@/services/productsApi";
 
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { getAllProducts } from "@/app/features/products/productSlice";
 import ProductItem from "./ProductItem";
 
 const Container = styled.div`
@@ -12,18 +10,11 @@ const Container = styled.div`
 `;
 
 function ProductsList() {
-  // 컴포넌트에서 다른 라이브러리를 임포트한다면 customHook으로 빼야되는 신호
-  const dispatch = useAppDispatch();
-  const { products } = useAppSelector((state) => state.products);
-
-  // SSR 적용 시에 index의 getStaticProps에서 dispatch
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+  const { data } = useGetProductsQuery();
 
   return (
     <Container>
-      {products.map((product) => (
+      {data?.map((product) => (
         <ProductItem key={product.id} data={product} />
       ))}
     </Container>
