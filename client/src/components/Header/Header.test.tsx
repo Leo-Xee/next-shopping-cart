@@ -9,7 +9,7 @@ const renderHeader = (mockedRouter: NextRouter) => {
   const result = render(
     <RouterContext.Provider value={mockedRouter}>
       <Header />
-    </RouterContext.Provider>
+    </RouterContext.Provider>,
   );
 
   const homeButton = () => result.getByRole("button", { name: "WOOWA SHOP" });

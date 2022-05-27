@@ -15,7 +15,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["jest.*.js", "next.config.js", "*.js"],
+  "ignorePatterns": ["jest.*.js", "next.config.js", "*.js", "_app.tsx"],
   "extends": [
     "airbnb",
     "airbnb-typescript",
@@ -44,10 +44,7 @@
     "no-restricted-exports": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "import/no-extraneous-dependencies": 0,
-    "@typescript-eslint/no-misused-promises": [
-      "error",
-      { "checksVoidReturn": false }
-    ],
+    "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
     "@typescript-eslint/no-floating-promises": 0,
     "global-require": 0
   }

@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "@emotion/react";
-import { QueryClientProvider, QueryClient } from "react-query";
+import { QueryClientProvider, QueryClient, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { useState } from "react";
 import GlobalStyle from "@/styles/GobalStyle";
 import theme from "@/styles/theme";
 import Layout from "@/components/Layout";
@@ -11,17 +12,19 @@ if (process.env.NODE_ENV === "development") {
   initMockAPI();
 }
 
-const queryClient = new QueryClient();
-
 function MyApp({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </Hydrate>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeProvider>
