@@ -18,14 +18,24 @@ const renderProducts = async (product: Omit<Product, "id" | "imageUrl">) => {
 
 describe("<ProductList />", () => {
   it("상품의 리스트를 보여준다.", async () => {
-    const { name, price, image, button } = await renderProducts({
+    const firstProduct = await renderProducts({
       name: "냉면용기(대)",
       price: 83700,
     });
 
-    expect(name).toBeInTheDocument();
-    expect(price).toBeInTheDocument();
-    expect(image).toBeInTheDocument();
-    expect(button).toBeInTheDocument();
+    expect(firstProduct.name).toBeInTheDocument();
+    expect(firstProduct.price).toBeInTheDocument();
+    expect(firstProduct.image).toBeInTheDocument();
+    expect(firstProduct.button).toBeInTheDocument();
+
+    const secondProduct = await renderProducts({
+      name: "생새우살 (71/90) 500g 4개",
+      price: 29000,
+    });
+
+    expect(secondProduct.name).toBeInTheDocument();
+    expect(secondProduct.price).toBeInTheDocument();
+    expect(secondProduct.image).toBeInTheDocument();
+    expect(secondProduct.button).toBeInTheDocument();
   });
 });
