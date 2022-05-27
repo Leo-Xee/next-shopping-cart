@@ -9,10 +9,10 @@ function createMockRouter(router: Partial<NextRouter>): NextRouter {
     asPath: "/",
     back: jest.fn(),
     beforePopState: jest.fn(),
-    prefetch: jest.fn(() => Promise.resolve()),
-    push: jest.fn(),
+    prefetch: jest.fn(),
+    push: jest.fn().mockResolvedValue(true),
     reload: jest.fn(),
-    replace: jest.fn(),
+    replace: jest.fn().mockResolvedValue(true),
     events: {
       on: jest.fn(),
       off: jest.fn(),

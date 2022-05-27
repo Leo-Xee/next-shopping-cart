@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import { useGetProductsQuery } from "@/services/productsApi";
+import { useQuery } from "react-query";
 
+import productService from "@/services/productService";
 import ProductItem from "./ProductItem";
 
 const Container = styled.div`
@@ -10,10 +11,12 @@ const Container = styled.div`
 `;
 
 function ProductsList() {
-  const { data } = useGetProductsQuery();
+  const { isLoading, isError, data } = useQuery("/products", productService.getProducts);
 
   return (
     <Container>
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Error...</div>}
       {data?.map((product) => (
         <ProductItem key={product.id} data={product} />
       ))}
