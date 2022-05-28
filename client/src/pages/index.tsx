@@ -1,4 +1,5 @@
 import { dehydrate, QueryClient } from "react-query";
+import { GetServerSideProps } from "next";
 import ProductsList from "@/components/ProductList";
 import productService from "@/services/productService";
 
@@ -10,7 +11,7 @@ function HomePage() {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery("/products", productService.getProducts);
@@ -20,6 +21,6 @@ export async function getServerSideProps() {
       dehydratedState: dehydrate(queryClient),
     },
   };
-}
+};
 
 export default HomePage;
