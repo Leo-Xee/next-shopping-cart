@@ -17,9 +17,7 @@ function ProductsList() {
     <Container>
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error...</div>}
-      {data?.map((product) => (
-        <ProductItem key={product.id} data={product} />
-      ))}
+      {data && data.map((product) => <ProductItem key={product.id} data={product} />)}
     </Container>
   );
 }
