@@ -1,4 +1,4 @@
-import productsHandlers from "./products";
+import productsHandlers from "./product";
 
 const handlers = [...Object.values(productsHandlers)];
 

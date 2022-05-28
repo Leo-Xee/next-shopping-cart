@@ -1,6 +1,7 @@
 import axios from "axios";
+import BASE_URL from "@/shared/constant/common";
 
-axios.defaults.baseURL = "http://localhost:3003";
+axios.defaults.baseURL = BASE_URL;
 
 const fetcher = async <T>(
   method: "get" | "post" | "patch" | "delete",
