@@ -6,8 +6,8 @@ const productService = {
     const data = await fetcher<Product[]>("get", "/products");
     return data;
   },
-  getProduct: async (id: number) => {
-    const data = await fetcher<Product>("get", "/product", { id });
+  getProduct: async (id: string) => {
+    const data = await fetcher<Product>("get", `/products/${id}`);
     return data;
   },
 };
