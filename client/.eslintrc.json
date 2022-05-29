@@ -46,6 +46,8 @@
     "import/no-extraneous-dependencies": 0,
     "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
     "@typescript-eslint/no-floating-promises": 0,
-    "global-require": 0
+    "global-require": 0,
+    "no-nested-ternary": 0,
+    "react/require-default-props": 0
   }
 }
