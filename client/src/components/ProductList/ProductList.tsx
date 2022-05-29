@@ -15,9 +15,13 @@ function ProductsList() {
 
   return (
     <Container>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Error...</div>}
-      {data && data.map((product) => <ProductItem key={product.id} data={product} />)}
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : isError ? (
+        <div>Error...</div>
+      ) : (
+        data && data.map((product) => <ProductItem key={product.id} data={product} />)
+      )}
     </Container>
   );
 }

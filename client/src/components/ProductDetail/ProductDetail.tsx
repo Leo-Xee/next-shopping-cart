@@ -16,18 +16,22 @@ function ProductDetail() {
 
   return (
     <div>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Error...</div>}
-      {data && (
-        <S.Container>
-          <Image src={data.imageUrl} alt={data.name} width="570px" height="570px" />
-          <S.Name>{data.name}</S.Name>
-          <S.PriceContainer>
-            <span>금액</span>
-            <span>{filterPrice(data.price)}원</span>
-          </S.PriceContainer>
-          <S.CartButton type="button">장바구니</S.CartButton>
-        </S.Container>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : isError ? (
+        <div>Error...</div>
+      ) : (
+        data && (
+          <S.Container>
+            <Image src={data.imageUrl} alt={data.name} width="570px" height="570px" />
+            <S.Name>{data.name}</S.Name>
+            <S.PriceContainer>
+              <span>금액</span>
+              <span>{filterPrice(data.price)}원</span>
+            </S.PriceContainer>
+            <S.CartButton type="button">장바구니</S.CartButton>
+          </S.Container>
+        )
       )}
     </div>
   );
