@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 /*
   /products
 */
@@ -10,24 +9,12 @@ export interface Product {
   imageUrl: string;
 }
 
-export interface GetProdutResponse extends Product {}
-
-export interface PostProductRequest {
-  product: Omit<Product, "id">;
-}
-
 /*
   /carts
 */
 
 export interface Cart {
   id: number;
-  product: Product;
-}
-
-export interface GetCartResponse extends Cart {}
-
-export interface PostCartRequest {
   product: Product;
 }
 
@@ -41,11 +28,5 @@ export interface OrderDetail extends Product {
 
 export interface Order {
   id: number;
-  orderDetails: OrderDetail[];
-}
-
-export interface GetOrderResponse extends Order {}
-
-export interface PostOrderResponse {
   orderDetails: OrderDetail[];
 }
