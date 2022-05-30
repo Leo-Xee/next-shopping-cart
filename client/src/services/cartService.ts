@@ -1,4 +1,4 @@
-import { Cart } from "@/@types/dto";
+import { Cart } from "@/@types/api";
 import fetcher from "@/shared/utils/fetcher";
 
 const cartService = {

@@ -1,4 +1,4 @@
-import { Product } from "@/@types/dto";
+import { Product } from "@/@types/api";
 import fetcher from "@/shared/utils/fetcher";
 
 const productService = {

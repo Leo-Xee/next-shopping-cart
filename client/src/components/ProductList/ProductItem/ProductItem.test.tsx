@@ -1,4 +1,4 @@
-import { Product } from "@/@types/dto";
+import { Product } from "@/@types/api";
 import { filterName, filterPrice } from "@/shared/utils/filter";
 import { render, screen } from "@/shared/utils/test-utils";
 import ProductItem from "./ProductItem";

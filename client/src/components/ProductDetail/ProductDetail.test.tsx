@@ -1,5 +1,5 @@
 import { RouterContext } from "next/dist/shared/lib/router-context";
-import { Product } from "@/@types/dto";
+import { Product } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
 import { render } from "@/shared/utils/test-utils";
 import ProductDetail from "./ProductDetail";

@@ -2,7 +2,7 @@ import { BsCart4 } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Product } from "@/@types/dto";
+import { Product } from "@/@types/api";
 import * as S from "./style";
 import { filterName, filterPrice } from "@/shared/utils/filter";
 
