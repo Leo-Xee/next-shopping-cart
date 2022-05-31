@@ -15,6 +15,33 @@ server.use(middlewares);
 
 server.use(jsonServer.bodyParser);
 
+/**
+ * Products
+ */
+
+/** 전체 상품 조회 */
+server.get("/products", (req, res) => {
+  res.status(200).json(db.get("products"));
+});
+
+/** 특정 상품 조회 */
+server.get("/products/:productId", (req, res) => {
+  const { productId } = req.params;
+  console.log(typeof productId, productId);
+
+  if (!Number(productId)) {
+    return res.sendStatus(400);
+  }
+
+  const product = db
+    .get("products")
+    .find((product) => product.id === Number(productId))
+    .value();
+
+  res.status(200).json(product);
+});
+
+/** 상품 추가 */
 server.post("/products", (req, res) => {
   const { price, name, imageUrl } = req.body;
 
@@ -30,22 +57,110 @@ server.post("/products", (req, res) => {
   }
 });
 
+/**
+ * Carts
+ */
+
+/** 전체 카트 조회 */
+server.get("/carts", (req, res) => {
+  res.status(200).json(db.get("carts"));
+});
+
+/** 카트 추가 */
 server.post("/carts", (req, res) => {
   const { product } = req.body;
-  const { price, name, imageUrl } = product;
+  const { id, price, name, imageUrl } = product;
 
   if (
     !Number.isInteger(price) ||
+    !Number.isInteger(id) ||
     typeof name !== "string" ||
     typeof imageUrl !== "string"
   ) {
-    res.sendStatus(400);
-  } else {
-    db.get("carts").push({ id: Date.now(), product }).write();
-    res.sendStatus(201);
+    return res.sendStatus(400);
   }
+
+  const targetIdx = db
+    .get("carts")
+    .findIndex((cart) => cart.product.id === id)
+    .value();
+
+  if (targetIdx < 0) {
+    db.get("carts")
+      .push({
+        id: Date.now(),
+        product: {
+          ...product,
+          quantity: 1,
+          selected: false,
+        },
+      })
+      .write();
+  } else {
+    db.get("carts")
+      .forEach((cart, idx) => {
+        if (targetIdx === idx) {
+          cart.product.quantity += 1;
+        }
+      })
+      .write();
+  }
+
+  res.sendStatus(201);
 });
 
+/** 전체 카트를 필드값 변경 */
+server.patch("/carts", (req, res) => {
+  const { selected } = req.body;
+
+  if (typeof selected !== "boolean") {
+    return res.sendStatus(400);
+  }
+
+  db.get("carts")
+    .forEach((cart) => {
+      cart.product.selected = selected;
+    })
+    .write();
+
+  res.sendStatus(200);
+});
+
+/** 특정 카트의 필드값 변경 */
+server.patch("/carts/:cartId", (req, res) => {
+  const { selected } = req.body;
+  const { cartId } = req.params;
+
+  if (typeof selected !== "boolean" || !Number(cartId)) {
+    return res.sendStatus(400);
+  }
+
+  const targetIdx = db
+    .get("carts")
+    .findIndex((cart) => cart.id === Number(cartId))
+    .value();
+
+  db.get("carts")
+    .forEach((cart, idx) => {
+      if (targetIdx === idx) {
+        cart.product.selected = selected;
+      }
+    })
+    .write();
+
+  res.sendStatus(200);
+});
+
+/**
+ * Orders
+ */
+
+/** 전체 주문 조회 */
+server.get("/orders", (req, res) => {
+  res.status(200).json(db.get("orders"));
+});
+
+/** 주문 추가 */
 server.post("/orders", (req, res) => {
   const { orderDetails } = req.body;
 
