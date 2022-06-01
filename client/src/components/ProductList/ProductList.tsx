@@ -3,9 +3,12 @@ import { useQuery } from "react-query";
 
 import productService from "@/services/productService";
 import ProductItem from "./ProductItem";
+import Spinner from "../common/Spinner";
+import ErroBanner from "../common/ErrorBanner/ErroBanner";
 
-const Container = styled.div`
+const Container = styled.ul`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 50px;
 `;
@@ -16,9 +19,9 @@ function ProductsList() {
   return (
     <Container>
       {isLoading ? (
-        <div>Loading...</div>
+        <Spinner message="로딩 중..." />
       ) : isError ? (
-        <div>Error...</div>
+        <ErroBanner />
       ) : (
         data && data.map((product) => <ProductItem key={product.id} data={product} />)
       )}
