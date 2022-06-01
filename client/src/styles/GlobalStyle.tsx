@@ -52,6 +52,10 @@ const style = css`
     border-spacing: 0;
     border-collapse: collapse;
   }
+  ol,
+  ul {
+    list-style: none;
+  }
 
   /* custom */
   * {
