@@ -5,6 +5,9 @@ import Image from "next/image";
 import productService from "@/services/productService";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
+import Spinner from "../common/Spinner";
+import ErrorBanner from "../common/ErrorBanner";
+import cartService from "@/services/cartService";
 
 function ProductDetail() {
   const router = useRouter();
@@ -14,12 +17,17 @@ function ProductDetail() {
     productService.getProduct(String(productId)),
   );
 
+  const addCartHandler = () => {
+    if (!data) return;
+    cartService.addCart(data);
+  };
+
   return (
     <div>
       {isLoading ? (
-        <div>Loading...</div>
+        <Spinner message="로딩 중..." />
       ) : isError ? (
-        <div>Error...</div>
+        <ErrorBanner />
       ) : (
         data && (
           <S.Container>
@@ -29,7 +37,9 @@ function ProductDetail() {
               <span>금액</span>
               <span>{filterPrice(data.price)}원</span>
             </S.PriceContainer>
-            <S.CartButton type="button">장바구니</S.CartButton>
+            <S.CartButton type="button" onClick={addCartHandler}>
+              장바구니
+            </S.CartButton>
           </S.Container>
         )
       )}
