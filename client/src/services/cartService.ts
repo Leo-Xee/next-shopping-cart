@@ -11,11 +11,15 @@ const cartService = {
     return data;
   },
   updateQuantity: async (cartId: number, quantity: number) => {
-    const data = await fetcher("patch", `/carts/quantity/${cartId}`, { quantity });
+    const data = await fetcher("patch", `/carts/${cartId}/quantity`, { quantity });
     return data;
   },
-  deleteCartItem: async (cartId: number) => {
+  deleteCart: async (cartId: number) => {
     const data = await fetcher("delete", `/carts/${cartId}`);
+    return data;
+  },
+  updateSelected: async (cartId: number, selected: boolean) => {
+    const data = await fetcher("patch", `/carts/${cartId}/selected`, { selected });
     return data;
   },
 };
