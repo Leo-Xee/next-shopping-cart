@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import cartService from "@/services/cartService";
 import { Cart } from "@/@types/api";
 
-function useCartMutation(cartItem: Cart) {
+function useCartItemMutation(cartItem: Cart) {
   const queryClient = useQueryClient();
 
   const afterHandler = {
@@ -12,23 +12,23 @@ function useCartMutation(cartItem: Cart) {
     },
   };
 
-  const updateQuantityMutation = useMutation(
-    (newQuantity: number) => cartService.updateQuantity(cartItem.id, newQuantity),
+  const updateCartQuantityMutation = useMutation(
+    (newQuantity: number) => cartService.updateCartQuantity(cartItem.id, newQuantity),
     afterHandler,
   );
 
-  const updateSelectedMutation = useMutation(
-    () => cartService.updateSelected(cartItem.id, !cartItem.product.selected),
+  const updateCartSelectedMutation = useMutation(
+    () => cartService.updateCartSelected(cartItem.id, !cartItem.product.selected),
     afterHandler,
   );
 
-  const dropMutation = useMutation(() => cartService.deleteCart(cartItem.id), afterHandler);
+  const deleteCartMutation = useMutation(() => cartService.deleteCart(cartItem.id), afterHandler);
 
   return {
-    increseQuantity: () => updateQuantityMutation.mutate(cartItem.product.quantity + 1),
-    decreseQuantity: () => updateQuantityMutation.mutate(cartItem.product.quantity - 1),
-    updateSelected: () => updateSelectedMutation.mutate(),
-    deleteCart: () => dropMutation.mutate(),
+    increseQuantity: () => updateCartQuantityMutation.mutate(cartItem.product.quantity + 1),
+    decreseQuantity: () => updateCartQuantityMutation.mutate(cartItem.product.quantity - 1),
+    updateSelected: () => updateCartSelectedMutation.mutate(),
+    deleteCart: () => deleteCartMutation.mutate(),
   };
 }
-export default useCartMutation;
+export default useCartItemMutation;
