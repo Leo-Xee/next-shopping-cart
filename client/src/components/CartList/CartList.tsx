@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 
-import { useEffect, useState } from "react";
 import * as S from "./style";
 import cartService from "@/services/cartService";
 import CartItem from "./CartItem";
@@ -10,18 +9,15 @@ import Spinner from "../common/Spinner";
 import ErrorBanner from "../common/ErrorBanner";
 import { Cart } from "@/@types/api";
 
+const useCartList = () => {
+  return useQuery("/carts", cartService.getCarts);
+};
+
 // SSR 확인하기
+// useMutate 사용하기
 function CartList() {
-  const [cartList, setCartList] = useState<Cart[] | []>([]);
-  const { isLoading, isError, data } = useQuery("/carts", cartService.getCarts);
-
-  useEffect(() => {
-    if (data) {
-      setCartList(data);
-    }
-  }, [data]);
-
   const checkAllHandler = () => {};
+  const { isLoading, isError, data: cartList } = useCartList();
 
   return (
     <>
@@ -39,9 +35,7 @@ function CartList() {
             </S.CheckController>
             <S.ListHeader>든든배송 상품 (3개)</S.ListHeader>
             {cartList &&
-              cartList.map((cartItem) => (
-                <CartItem key={cartItem.id} cartItem={cartItem} setCartList={setCartList} />
-              ))}
+              cartList.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
           </S.List>
           <S.Indicator>
             <S.ResultTitle>결제예상금액</S.ResultTitle>

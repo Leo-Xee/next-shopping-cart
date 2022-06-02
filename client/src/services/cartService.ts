@@ -10,6 +10,14 @@ const cartService = {
     const data = await fetcher("post", "/carts", { product });
     return data;
   },
+  updateQuantity: async (cartId: number, quantity: number) => {
+    const data = await fetcher("patch", `/carts/quantity/${cartId}`, { quantity });
+    return data;
+  },
+  deleteCartItem: async (cartId: number) => {
+    const data = await fetcher("delete", `/carts/${cartId}`);
+    return data;
+  },
 };
 
 export default cartService;

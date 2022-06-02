@@ -126,8 +126,8 @@ server.patch("/carts", (req, res) => {
   res.sendStatus(200);
 });
 
-/** 특정 카트의 필드값 변경 */
-server.patch("/carts/:cartId", (req, res) => {
+/** 특정 카트의 선택 여부 변경 */
+server.patch("/carts/selected/:cartId", (req, res) => {
   const { selected } = req.body;
   const { cartId } = req.params;
 
@@ -140,6 +140,10 @@ server.patch("/carts/:cartId", (req, res) => {
     .findIndex((cart) => cart.id === Number(cartId))
     .value();
 
+  if (targetIdx < 0) {
+    return res.sendStatus(400);
+  }
+
   db.get("carts")
     .forEach((cart, idx) => {
       if (targetIdx === idx) {
@@ -147,6 +151,61 @@ server.patch("/carts/:cartId", (req, res) => {
       }
     })
     .write();
+
+  res.sendStatus(200);
+});
+
+/** 특정 카트의 수량 변경 */
+server.patch("/carts/quantity/:cartId", (req, res) => {
+  const { cartId } = req.params;
+  const { quantity } = req.body;
+
+  console.log(typeof cartId, cartId);
+  console.log(typeof quantity, quantity);
+
+  if (!Number(quantity) || !Number(cartId)) {
+    return res.sendStatus(400);
+  }
+
+  const targetIdx = db
+    .get("carts")
+    .findIndex((cart) => cart.id === Number(cartId))
+    .value();
+
+  if (targetIdx < 0) {
+    return res.sendStatus(400);
+  }
+
+  db.get("carts")
+    .forEach((cart, idx) => {
+      if (targetIdx === idx) {
+        cart.product.quantity = quantity;
+      }
+    })
+    .write();
+
+  res.sendStatus(200);
+});
+
+server.delete("/carts/:cartId", (req, res) => {
+  const { cartId } = req.params;
+
+  if (!Number(cartId)) {
+    return res.sendStatus(400);
+  }
+
+  const targetIdx = db
+    .get("carts")
+    .findIndex((cart) => cart.id === Number(cartId))
+    .value();
+
+  if (targetIdx < 0) {
+    return res.sendStatus(400);
+  }
+
+  const result = db.get("carts").splice(targetIdx, 1).write();
+
+  console.log(result);
 
   res.sendStatus(200);
 });
