@@ -13,9 +13,9 @@ import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
 // SSR 확인하기
 function CartList() {
   const { isLoading, isError, data } = useQuery("/carts", cartService.getCarts);
-  const { updateSelectedAll } = useCartListMutation();
+  const { updateSelectedAll, deleteSelectedCarts } = useCartListMutation();
 
-  const { totalPrice, totalCount, isSelectedAll } = useCalcCartList(data ?? []);
+  const { totalPrice, totalCount, isSelectedAll, selectedCartIdList } = useCalcCartList(data ?? []);
 
   return (
     <>
@@ -34,7 +34,9 @@ function CartList() {
                 checked={isSelectedAll}
                 label={isSelectedAll ? "전체 해제" : "전체 선택"}
               />
-              <button type="button">상품 삭제</button>
+              <button type="button" onClick={() => deleteSelectedCarts(selectedCartIdList)}>
+                상품 삭제
+              </button>
             </S.CheckController>
             <S.ListHeader>든든배송 상품 ({data?.length}개)</S.ListHeader>
             {data && data.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}

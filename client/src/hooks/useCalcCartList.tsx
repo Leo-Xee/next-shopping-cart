@@ -1,6 +1,17 @@
 import { Cart } from "@/@types/api";
 
 function useCalcCartList(cartList: Cart[]) {
+  const calcSelectedCartIdList = (): number[] => {
+    const cartIdList: number[] = [];
+
+    cartList.forEach((cart) => {
+      if (cart.product.selected) {
+        cartIdList.push(cart.id);
+      }
+    });
+    return cartIdList;
+  };
+
   const totalPrice = cartList.reduce((prev, cur) => {
     if (cur.product.selected) {
       return prev + cur.product.price * cur.product.quantity;
@@ -21,6 +32,7 @@ function useCalcCartList(cartList: Cart[]) {
     totalPrice,
     totalCount,
     isSelectedAll,
+    selectedCartIdList: calcSelectedCartIdList(),
   };
 }
 
