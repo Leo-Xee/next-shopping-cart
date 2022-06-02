@@ -5,23 +5,22 @@ import cartService from "@/services/cartService";
 function useCartListMutation() {
   const queryClient = useQueryClient();
 
+  const afterHandler = {
+    onSuccess: () => {
+      queryClient.invalidateQueries("/carts");
+    },
+  };
+
   const deleteSelectedCartsMutation = useMutation(
     (cartIdList: number[]) => cartService.deleteSelectedCarts(cartIdList),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("/carts");
-      },
-    },
+    afterHandler,
   );
 
   const updateSelectedAllMutation = useMutation(
     (checked: boolean) => cartService.updateSelectedAll(!checked),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("/carts");
-      },
-    },
+    afterHandler,
   );
+
   return {
     updateSelectedAll: (checked: boolean) => updateSelectedAllMutation.mutate(checked),
     deleteSelectedCarts: (cartIdList: number[]) => deleteSelectedCartsMutation.mutate(cartIdList),
