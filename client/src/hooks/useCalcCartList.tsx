@@ -26,12 +26,20 @@ function useCalcCartList(cartList: Cart[]) {
     return prev;
   }, 0);
 
-  const isSelectedAll = cartList.every((cart) => cart.product.selected === true);
+  const isEmpty = () => cartList.length === 0;
+
+  const isSelectedAll = () => {
+    if (!isEmpty()) {
+      return cartList.every((cart) => cart.product.selected === true);
+    }
+    return false;
+  };
 
   return {
     totalPrice,
     totalCount,
-    isSelectedAll,
+    isEmpty: isEmpty(),
+    isSelectedAll: isSelectedAll(),
     selectedCartIdList: calcSelectedCartIdList(),
   };
 }

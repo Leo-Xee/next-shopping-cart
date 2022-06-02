@@ -15,7 +15,9 @@ function CartList() {
   const { isLoading, isError, data } = useQuery("/carts", cartService.getCarts);
   const { updateSelectedAll, deleteSelectedCarts } = useCartListMutation();
 
-  const { totalPrice, totalCount, isSelectedAll, selectedCartIdList } = useCalcCartList(data ?? []);
+  const { totalPrice, totalCount, isEmpty, isSelectedAll, selectedCartIdList } = useCalcCartList(
+    data ?? [],
+  );
 
   return (
     <>
@@ -32,6 +34,7 @@ function CartList() {
                 id="select"
                 onChange={() => updateSelectedAll(isSelectedAll)}
                 checked={isSelectedAll}
+                disabled={isEmpty}
                 label={isSelectedAll ? "전체 해제" : "전체 선택"}
               />
               <button type="button" onClick={() => deleteSelectedCarts(selectedCartIdList)}>
