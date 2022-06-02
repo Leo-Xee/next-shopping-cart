@@ -126,9 +126,6 @@ server.patch("/carts/selected", (req, res) => {
   res.sendStatus(200);
 });
 
-/** 특정 카트들을 삭제 */
-// server.delete("/carts", (req, res) => {});
-
 /** 특정 카트의 선택 여부 변경 */
 server.patch("/carts/:cartId/selected", (req, res) => {
   const { selected } = req.body;
@@ -186,6 +183,28 @@ server.patch("/carts/:cartId/quantity", (req, res) => {
       }
     })
     .write();
+
+  res.sendStatus(200);
+});
+
+/** 특정 카트들을 삭제 */
+server.delete("/carts", (req, res) => {
+  const { cartIdList } = req.body;
+
+  if (!Array.isArray(cartIdList)) return res.sendStatus(400);
+
+  cartIdList.forEach((cartId) => {
+    if (!Number(cartId)) return res.sendStatus(400);
+  });
+
+  for (let i = 0; i < cartIdList.length; i++) {
+    const targetIdx = db
+      .get("carts")
+      .findIndex((cart) => cart.id === Number(cartIdList[i]))
+      .value();
+
+    db.get("carts").splice(targetIdx, 1).write();
+  }
 
   res.sendStatus(200);
 });
