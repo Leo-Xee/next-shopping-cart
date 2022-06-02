@@ -5,7 +5,7 @@ import * as S from "./style";
 import { Cart } from "@/@types/api";
 import Checkbox from "@/components/common/Checkbox/Checkbox";
 import { filterPrice } from "@/shared/utils/filter";
-import useCartMutation from "@/hooks/useCartMutation";
+import useCartItemMutation from "@/hooks/apis/cart/useCartItemMutation";
 
 type CartItemProps = {
   cartItem: Cart;
@@ -15,7 +15,7 @@ function CartItem({ cartItem }: CartItemProps) {
   const { name, imageUrl, price, quantity, selected } = cartItem.product;
 
   const { increseQuantity, decreseQuantity, updateSelected, deleteCart } =
-    useCartMutation(cartItem);
+    useCartItemMutation(cartItem);
 
   return (
     <S.Container>
