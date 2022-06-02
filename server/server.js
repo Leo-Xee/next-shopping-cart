@@ -109,8 +109,8 @@ server.post("/carts", (req, res) => {
   res.sendStatus(201);
 });
 
-/** 전체 카트를 필드값 변경 */
-server.patch("/carts", (req, res) => {
+/** 전체 카트를 선택 여부 변경 */
+server.patch("/carts/selected", (req, res) => {
   const { selected } = req.body;
 
   if (typeof selected !== "boolean") {
@@ -126,8 +126,11 @@ server.patch("/carts", (req, res) => {
   res.sendStatus(200);
 });
 
+/** 특정 카트들을 삭제 */
+// server.delete("/carts", (req, res) => {});
+
 /** 특정 카트의 선택 여부 변경 */
-server.patch("/carts/selected/:cartId", (req, res) => {
+server.patch("/carts/:cartId/selected", (req, res) => {
   const { selected } = req.body;
   const { cartId } = req.params;
 
@@ -156,7 +159,7 @@ server.patch("/carts/selected/:cartId", (req, res) => {
 });
 
 /** 특정 카트의 수량 변경 */
-server.patch("/carts/quantity/:cartId", (req, res) => {
+server.patch("/carts/:cartId/quantity", (req, res) => {
   const { cartId } = req.params;
   const { quantity } = req.body;
 
@@ -187,6 +190,7 @@ server.patch("/carts/quantity/:cartId", (req, res) => {
   res.sendStatus(200);
 });
 
+/** 특정 카트 삭제 */
 server.delete("/carts/:cartId", (req, res) => {
   const { cartId } = req.params;
 
