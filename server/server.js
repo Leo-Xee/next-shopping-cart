@@ -189,7 +189,8 @@ server.patch("/carts/:cartId/quantity", (req, res) => {
 
 /** 특정 카트들을 삭제 */
 server.delete("/carts", (req, res) => {
-  const { cartIdList } = req.body;
+  const { deleteItems } = req.query;
+  const cartIdList = deleteItems.split(",");
 
   if (!Array.isArray(cartIdList)) return res.sendStatus(400);
 

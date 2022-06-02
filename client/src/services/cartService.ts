@@ -26,6 +26,11 @@ const cartService = {
     const data = await fetcher("patch", "/carts/selected", { selected });
     return data;
   },
+  deleteSelectedCarts: async (cartIdList: number[]) => {
+    const cartIdListString = cartIdList.join(",");
+    const data = await fetcher("delete", `/carts?deleteItems=${cartIdListString}`);
+    return data;
+  },
 };
 
 export default cartService;
