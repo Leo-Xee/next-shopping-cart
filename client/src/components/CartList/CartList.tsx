@@ -7,26 +7,15 @@ import Checkbox from "../common/Checkbox/Checkbox";
 import { filterPrice } from "@/shared/utils/filter";
 import Spinner from "../common/Spinner";
 import ErrorBanner from "../common/ErrorBanner";
+import useCalcCartList from "@/hooks/useCalcCartList";
+import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
 
 // SSR 확인하기
 function CartList() {
   const { isLoading, isError, data } = useQuery("/carts", cartService.getCarts);
+  const { updateSelectedAll } = useCartListMutation();
 
-  const checkAllHandler = () => {};
-
-  const totalPrice = data?.reduce((prev, cur) => {
-    if (cur.product.selected) {
-      return prev + cur.product.price * cur.product.quantity;
-    }
-    return prev;
-  }, 0);
-
-  const totalCount = data?.reduce((prev, cur) => {
-    if (cur.product.selected) {
-      return prev + cur.product.quantity;
-    }
-    return prev;
-  }, 0);
+  const { totalPrice, totalCount, isSelectedAll } = useCalcCartList(data ?? []);
 
   return (
     <>
@@ -39,10 +28,15 @@ function CartList() {
         <S.Container>
           <S.List>
             <S.CheckController>
-              <Checkbox id="select" onChange={checkAllHandler} checked label="전체 선택" />
+              <Checkbox
+                id="select"
+                onChange={() => updateSelectedAll(isSelectedAll)}
+                checked={isSelectedAll}
+                label={isSelectedAll ? "전체 해제" : "전체 선택"}
+              />
               <button type="button">상품 삭제</button>
             </S.CheckController>
-            <S.ListHeader>든든배송 상품 (3개)</S.ListHeader>
+            <S.ListHeader>든든배송 상품 ({data?.length}개)</S.ListHeader>
             {data && data.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
           </S.List>
           <S.Indicator>

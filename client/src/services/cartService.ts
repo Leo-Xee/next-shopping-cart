@@ -22,6 +22,10 @@ const cartService = {
     const data = await fetcher("patch", `/carts/${cartId}/selected`, { selected });
     return data;
   },
+  updateSelectedAll: async (selected: boolean) => {
+    const data = await fetcher("patch", "/carts/selected", { selected });
+    return data;
+  },
 };
 
 export default cartService;
