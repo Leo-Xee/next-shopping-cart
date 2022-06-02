@@ -19,7 +19,7 @@ export interface CartItem extends Product {
 
 export interface Cart {
   id: number;
-  product: Product;
+  product: CartItem;
 }
 
 /*
