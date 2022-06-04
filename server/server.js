@@ -24,10 +24,9 @@ server.get("/products", (req, res) => {
   res.status(200).json(db.get("products"));
 });
 
-/** 특정 상품 조회 */
+/** 단일 상품 조회 */
 server.get("/products/:productId", (req, res) => {
   const { productId } = req.params;
-  console.log(typeof productId, productId);
 
   if (!Number(productId)) {
     return res.sendStatus(400);
@@ -109,7 +108,7 @@ server.post("/carts", (req, res) => {
   res.sendStatus(201);
 });
 
-/** 전체 카트를 선택 여부 변경 */
+/** 전체 카트의 선택여부 변경 */
 server.patch("/carts/selected", (req, res) => {
   const { selected } = req.body;
 
@@ -126,7 +125,7 @@ server.patch("/carts/selected", (req, res) => {
   res.sendStatus(200);
 });
 
-/** 특정 카트의 선택 여부 변경 */
+/** 단일 카트의 선택여부 변경 */
 server.patch("/carts/:cartId/selected", (req, res) => {
   const { selected } = req.body;
   const { cartId } = req.params;
@@ -155,13 +154,10 @@ server.patch("/carts/:cartId/selected", (req, res) => {
   res.sendStatus(200);
 });
 
-/** 특정 카트의 수량 변경 */
+/** 단일 카트의 수량 변경 */
 server.patch("/carts/:cartId/quantity", (req, res) => {
   const { cartId } = req.params;
   const { quantity } = req.body;
-
-  console.log(typeof cartId, cartId);
-  console.log(typeof quantity, quantity);
 
   if (!Number(quantity) || !Number(cartId)) {
     return res.sendStatus(400);
@@ -187,7 +183,7 @@ server.patch("/carts/:cartId/quantity", (req, res) => {
   res.sendStatus(200);
 });
 
-/** 특정 카트들을 삭제 */
+/** 다수의 카트 삭제 */
 server.delete("/carts", (req, res) => {
   const { deleteItems } = req.query;
   const cartIdList = deleteItems.split(",");
@@ -210,7 +206,7 @@ server.delete("/carts", (req, res) => {
   res.sendStatus(200);
 });
 
-/** 특정 카트 삭제 */
+/** 단일 카트 삭제 */
 server.delete("/carts/:cartId", (req, res) => {
   const { cartId } = req.params;
 
@@ -228,8 +224,6 @@ server.delete("/carts/:cartId", (req, res) => {
   }
 
   const result = db.get("carts").splice(targetIdx, 1).write();
-
-  console.log(result);
 
   res.sendStatus(200);
 });
