@@ -48,7 +48,7 @@ export const Label = styled.label`
   }
 
   & input[type="checkbox"] {
-    display: none;
+    appearance: none;
   }
 `;
 
