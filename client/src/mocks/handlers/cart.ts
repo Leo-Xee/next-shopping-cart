@@ -1,35 +1,122 @@
 import { rest } from "msw";
 import BASE_URL from "@/shared/constant/common";
+import {
+  carts,
+  PatchQuantityRequestBody,
+  PatchSelectedRequestBody,
+  PostRequestBody,
+} from "../data/carts";
 
 const cartHandler = [
   /**
-   * 장바구니 전체 상품 조회
+   * 전체 카트 조회
    */
   rest.get(`${BASE_URL}/carts`, (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json([
-        {
-          id: 1,
-          product: {
-            id: 1,
-            name: "냉면용기(대)",
-            price: 83700,
-            imageUrl: "https://cdn-mart.baemin.com/goods/2/1556008840639m0.jpg",
-          },
+    return res(ctx.status(200), ctx.json(carts));
+  }),
+
+  /**
+   * 카트 추가(이미 존재하면 수량 +1)
+   */
+  rest.post<PostRequestBody>(`${BASE_URL}/carts`, (req, res, ctx) => {
+    const { product } = req.body;
+
+    const targetIdx = carts.findIndex((cart) => cart.product.id === product.id);
+
+    if (targetIdx < 0) {
+      carts.push({
+        id: Date.now(),
+        product: {
+          ...product,
+          quantity: 1,
+          selected: false,
         },
-        {
-          id: 2,
-          product: {
-            id: 2,
-            name: "생새우살 (71/90) 500g 4개",
-            price: 29000,
-            imageUrl:
-              "https://cdn-mart.baemin.com/sellergoods/main/6b95c66a-c13d-4ccd-9df5-b1af1428a225.jpg",
-          },
-        },
-      ]),
-    );
+      });
+    } else {
+      carts.forEach((cart) => {
+        if (cart.product.id === product.id) {
+          cart.product.quantity += 1;
+        }
+      });
+    }
+
+    return res(ctx.status(200));
+  }),
+
+  /**
+   * 전체 카트의 선택여부 변경
+   */
+  rest.patch<PatchSelectedRequestBody>(`${BASE_URL}/carts/selected`, (req, res, ctx) => {
+    const { selected } = req.body;
+
+    carts.forEach((cart) => {
+      cart.product.selected = selected;
+    });
+
+    return res(ctx.status(200));
+  }),
+
+  /**
+   * 단일 카트의 선택여부 변경
+   */
+  rest.patch<PatchSelectedRequestBody>(`${BASE_URL}/carts/:cartId/selected`, (req, res, ctx) => {
+    const { selected } = req.body;
+    const { cartId } = req.params;
+
+    carts.forEach((cart) => {
+      if (cart.id === Number(cartId)) {
+        cart.product.selected = selected;
+      }
+    });
+
+    return res(ctx.status(200));
+  }),
+
+  /**
+   * 단일 카트의 수량 변경
+   */
+  rest.patch<PatchQuantityRequestBody>(`${BASE_URL}/carts/:cartId/quantity`, (req, res, ctx) => {
+    const { cartId } = req.params;
+    const { quantity } = req.body;
+
+    carts.forEach((cart) => {
+      if (cart.id === Number(cartId)) {
+        cart.product.quantity = quantity;
+      }
+    });
+
+    return res(ctx.status(200));
+  }),
+
+  /**
+   * 다수의 카트 삭제
+   */
+  rest.delete(`${BASE_URL}/carts`, (req, res, ctx) => {
+    const deleteItems = req.url.searchParams.get("deleteItems");
+
+    if (!deleteItems) return res(ctx.status(400));
+
+    const cartIdList = deleteItems.split(",");
+    cartIdList.forEach((cartId) => {
+      const targetIdx = carts.findIndex((cart) => cart.id === Number(cartId));
+
+      carts.splice(targetIdx, 1);
+    });
+
+    return res(ctx.status(200));
+  }),
+
+  /**
+   * 단일 카트 삭제
+   */
+  rest.delete(`${BASE_URL}/carts/:cartId`, (req, res, ctx) => {
+    const { cartId } = req.params;
+
+    const targetIdx = carts.findIndex((cart) => cart.id === Number(cartId));
+
+    carts.splice(targetIdx, 1);
+
+    return res(ctx.status(200));
   }),
 ];
 
