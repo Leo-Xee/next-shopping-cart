@@ -4,7 +4,7 @@ type CheckboxProps = {
   id: string;
   label?: string;
   checked: boolean;
-  disabled: boolean;
+  disabled?: boolean;
   onChange: () => void;
 };
 
