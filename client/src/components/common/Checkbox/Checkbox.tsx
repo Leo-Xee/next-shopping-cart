@@ -14,8 +14,8 @@ function Checkbox({ id, label, checked, disabled, onChange }: CheckboxProps) {
       <S.Label htmlFor={id}>
         <input id={id} type="checkbox" onChange={onChange} checked={checked} disabled={disabled} />
         <span />
+        <S.Text>{label}</S.Text>
       </S.Label>
-      <S.Text>{label}</S.Text>
     </S.Container>
   );
 }
