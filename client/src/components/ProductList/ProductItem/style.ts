@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div`
   width: 282px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px ${({ theme }) => theme.light.box_shadow_color};
 `;
 
 export const InfoContainer = styled.div`

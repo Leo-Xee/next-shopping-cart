@@ -5,10 +5,14 @@ declare module "@emotion/react" {
     light: {
       maxWidth: string;
       minWidth: string;
+      box_shadow_color: string;
       primary: string;
+      primary_light: string;
       white: string;
       brown: string;
-      gray: string;
+      gray_dark: string;
+      gray_medium: string;
+      gray_light: string;
     };
   }
 }
