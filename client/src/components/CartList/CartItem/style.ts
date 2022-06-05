@@ -13,6 +13,14 @@ export const Name = styled.div`
   font-size: 2rem;
 `;
 
+export const LinkContainer = styled.div`
+  display: flex;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export const Controllor = styled.div`
   display: flex;
   flex-direction: column;

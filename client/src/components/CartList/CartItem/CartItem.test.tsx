@@ -1,23 +1,24 @@
 import { Cart } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
-import { render } from "@/shared/utils/test-utils";
+import { render, screen } from "@/shared/utils/test-utils";
 import CartItem from "./CartItem";
 
-const cartItem = {
+const cartItem: Cart = {
   id: 1,
   product: {
     id: 1,
     name: "냉면용기(대)",
     price: 83700,
     imageUrl: "https://cdn-mart.baemin.com/goods/2/1556008840639m0.jpg",
-    quantity: 10,
+    quantity: 1,
     selected: false,
   },
 };
 
 const renderCartItem = (cart: Cart) => {
-  const result = render(<CartItem cartItem={cartItem} />);
+  const result = render(<CartItem cartItem={cart} />);
 
+  const { id } = cart.product;
   const image = () => result.getByRole("img", { name: `${cart.product.name}` });
   const name = () => result.getByText(cart.product.name);
   const price = () =>
@@ -27,7 +28,7 @@ const renderCartItem = (cart: Cart) => {
   const quantityUpBtn = () => result.getByRole("button", { name: "+" });
   const quantityDownBtn = () => result.getByRole("button", { name: "-" });
 
-  return { image, name, price, checkbox, deleteBtn, quantityUpBtn, quantityDownBtn };
+  return { id, image, name, price, checkbox, deleteBtn, quantityUpBtn, quantityDownBtn };
 };
 
 describe("<CardItem />", () => {
@@ -42,5 +43,19 @@ describe("<CardItem />", () => {
     expect(deleteBtn()).toBeInTheDocument();
     expect(quantityUpBtn()).toBeInTheDocument();
     expect(quantityDownBtn()).toBeInTheDocument();
+  });
+
+  it("카트의 수량이 1 이하일 때 수량 감소 버튼(-)이 disabled 된다.", () => {
+    const { quantityDownBtn } = renderCartItem(cartItem);
+
+    expect(quantityDownBtn()).toBeDisabled();
+  });
+
+  it("상품의 이름과 이미지를 클릭하면 상품 상세 페이지로 이동한다.", () => {
+    const { id: productId } = renderCartItem(cartItem);
+
+    const link = screen.getByRole("link");
+
+    expect(link).toHaveAttribute("href", `/products/${productId}`);
   });
 });
