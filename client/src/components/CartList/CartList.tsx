@@ -5,11 +5,12 @@ import * as S from "./style";
 import cartService from "@/services/cartService";
 import CartItem from "./CartItem";
 import Checkbox from "../common/Checkbox/Checkbox";
-import { filterPrice } from "@/shared/utils/filter";
 import Spinner from "../common/Spinner";
 import ErrorBanner from "../common/ErrorBanner";
 import useCalcCartList from "@/hooks/useCalcCartList";
 import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
+import Indicator from "../Indicator";
+import { filterPrice } from "@/shared/utils/filter";
 
 // SSR 확인하기
 function CartList() {
@@ -48,18 +49,15 @@ function CartList() {
               {data && data.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
             </ul>
           </S.ListContainer>
-          <S.Indicator>
-            <S.ResultTitle>결제예상금액</S.ResultTitle>
-            <S.ResultContainer>
-              <S.ResultInfo>
-                <span>결제예상금액</span>
-                <span>{filterPrice(totalPrice ?? 0)}원</span>
-              </S.ResultInfo>
-              <button type="button" onClick={() => router.push("/order")}>
-                주문하기({totalCount}개)
-              </button>
-            </S.ResultContainer>
-          </S.Indicator>
+          <S.IndicatorWrapper>
+            <Indicator
+              title="결제예상금액"
+              itemName="총 결제예상금액"
+              itemPrice={`${filterPrice(totalPrice)}`}
+              buttonName={`주문하기(${totalCount}개)`}
+              onClick={() => router.push("/order")}
+            />
+          </S.IndicatorWrapper>
         </S.Container>
       )}
     </>

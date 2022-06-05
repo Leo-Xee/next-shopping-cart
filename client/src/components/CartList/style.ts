@@ -11,7 +11,7 @@ export const Title = styled.h1`
   text-align: center;
   font-size: 3rem;
   font-weight: 500;
-  border-bottom: 3px solid #333333;
+  border-bottom: 3px solid ${({ theme }) => theme.light.gray_dark};
 `;
 
 export const CheckController = styled.div`
@@ -21,54 +21,21 @@ export const CheckController = styled.div`
 
   & button {
     padding: 10px 15px;
-    border: 1px solid #bbbbbb;
+    border: 1px solid ${({ theme }) => theme.light.gray_light};
   }
 `;
 
 export const ListHeader = styled.div`
   padding: 20px 0;
   font-size: 2rem;
-  border-bottom: 3px solid #aaaaaa;
+  border-bottom: 3px solid ${({ theme }) => theme.light.gray_medium};
 `;
 
 export const ListContainer = styled.div`
   flex: 6.5;
 `;
 
-export const Indicator = styled.div`
+export const IndicatorWrapper = styled.div`
+  padding-top: 65px;
   flex: 3.5;
-  height: fit-content;
-  border: 1px solid #bbbbbb;
-
-  & button {
-    padding: 20px 10px;
-    width: 100%;
-    background-color: ${({ theme }) => theme.light.primary};
-    color: ${({ theme }) => theme.light.white};
-    font-size: 2rem;
-    font-weight: 500;
-  }
-`;
-
-export const ResultTitle = styled.div`
-  text-align: center;
-  padding: 20px;
-  font-size: 2.5rem;
-  border-bottom: 1px solid #bbbbbb;
-`;
-
-export const ResultContainer = styled.div`
-  padding: 30px 20px;
-`;
-
-export const ResultInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 2rem;
-  font-weight: 700;
-  padding-bottom: 60px;
-
-  & span {
-    box-shadow: inset 0 -10px rgba(42, 193, 188, 0.5);
-  }
 `;
