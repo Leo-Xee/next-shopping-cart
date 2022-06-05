@@ -28,7 +28,7 @@ function CartList() {
         <ErrorBanner />
       ) : (
         <S.Container>
-          <S.List>
+          <S.ListContainer>
             <S.CheckController>
               <Checkbox
                 id="select"
@@ -42,8 +42,10 @@ function CartList() {
               </button>
             </S.CheckController>
             <S.ListHeader>든든배송 상품 ({data?.length}개)</S.ListHeader>
-            {data && data.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
-          </S.List>
+            <ul>
+              {data && data.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
+            </ul>
+          </S.ListContainer>
           <S.Indicator>
             <S.ResultTitle>결제예상금액</S.ResultTitle>
             <S.ResultContainer>

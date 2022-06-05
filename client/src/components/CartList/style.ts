@@ -31,7 +31,7 @@ export const ListHeader = styled.div`
   border-bottom: 3px solid #aaaaaa;
 `;
 
-export const List = styled.div`
+export const ListContainer = styled.div`
   flex: 6.5;
 `;
 
