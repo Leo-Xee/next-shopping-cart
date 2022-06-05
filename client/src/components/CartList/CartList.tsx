@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { useRouter } from "next/router";
 
 import * as S from "./style";
 import cartService from "@/services/cartService";
@@ -12,6 +13,7 @@ import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
 
 // SSR 확인하기
 function CartList() {
+  const router = useRouter();
   const { isLoading, isError, data } = useQuery("/carts", cartService.getCarts);
   const { updateSelectedAll, deleteSelectedCarts } = useCartListMutation();
 
@@ -53,7 +55,9 @@ function CartList() {
                 <span>결제예상금액</span>
                 <span>{filterPrice(totalPrice ?? 0)}원</span>
               </S.ResultInfo>
-              <button type="button">주문하기({totalCount}개)</button>
+              <button type="button" onClick={() => router.push("/order")}>
+                주문하기({totalCount}개)
+              </button>
             </S.ResultContainer>
           </S.Indicator>
         </S.Container>
