@@ -32,7 +32,7 @@ function CartItem({ cartItem }: CartItemProps) {
             <button type="button" onClick={() => increseQuantity()}>
               +
             </button>
-            <button type="button" onClick={() => decreseQuantity()}>
+            <button type="button" onClick={() => decreseQuantity()} disabled={quantity <= 1}>
               -
             </button>
           </S.QuantityCotrollor>
