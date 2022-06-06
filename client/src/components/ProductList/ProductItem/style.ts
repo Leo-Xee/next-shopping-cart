@@ -2,7 +2,11 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div`
   width: 282px;
-  box-shadow: 0 0 10px ${({ theme }) => theme.box_shadow_color};
+  box-shadow: 0 0 5px ${({ theme }) => theme.box_shadow_color};
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const InfoContainer = styled.div`
