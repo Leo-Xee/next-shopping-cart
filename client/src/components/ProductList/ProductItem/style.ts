@@ -25,12 +25,12 @@ export const InfoContainer = styled.div`
 
 export const Info = styled.div`
   flex: 9;
-  padding: 10px 15px;
+  padding: 10px 0 15px 10px;
 `;
 
 export const CartButton = styled.button`
   flex: 1;
-  padding: 15px;
+  padding: 0 10px 0 5px;
   transition: transform 0.2s ease-in-out;
 
   &:hover {
