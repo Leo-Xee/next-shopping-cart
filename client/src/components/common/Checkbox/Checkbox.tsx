@@ -1,3 +1,5 @@
+import { ChangeEventHandler } from "react";
+
 import * as S from "./style";
 
 type CheckboxProps = {
@@ -5,7 +7,7 @@ type CheckboxProps = {
   label?: string;
   checked: boolean;
   disabled?: boolean;
-  onChange: () => void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
 function Checkbox({ id, label, checked, disabled, onChange }: CheckboxProps) {
