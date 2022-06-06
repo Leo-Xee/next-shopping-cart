@@ -7,11 +7,18 @@ export type ButtonProps = {
   buttonName: string;
   colorType: "default" | "primary" | "brown";
   size: "default" | "full";
+  disabled?: boolean;
 };
 
-function Button({ onClick, buttonName, colorType, size }: ButtonProps) {
+function Button({ onClick, buttonName, colorType, size, disabled }: ButtonProps) {
   return (
-    <StyledButton type="button" size={size} colorType={colorType} onClick={onClick}>
+    <StyledButton
+      type="button"
+      size={size}
+      colorType={colorType}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {buttonName}
     </StyledButton>
   );

@@ -18,11 +18,6 @@ export const CheckController = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 1.5rem;
-
-  & button {
-    padding: 10px 15px;
-    border: 1px solid ${({ theme }) => theme.gray_light};
-  }
 `;
 
 export const ListHeader = styled.div`

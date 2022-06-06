@@ -5,9 +5,11 @@ import { ButtonProps } from "./Button";
 
 type StyledButtonProps = Omit<ButtonProps, "buttonName">;
 
+const isDefault = (colorType: StyledButtonProps["colorType"]) => colorType === "default";
+
 const SIZE = {
   default: css`
-    padding: 12px 8px;
+    padding: 12px;
     font-size: 1.6rem;
     font-weight: 400;
   `,
@@ -20,7 +22,8 @@ const SIZE = {
 };
 
 const setColor = (theme: Theme, colorType: StyledButtonProps["colorType"]) => css`
-  color: ${colorType !== "default" ? theme.white : theme.black};
+  color: ${isDefault(colorType) ? theme.black : theme.white};
+  border: 1px solid ${isDefault(colorType) && theme.gray_light};
   background-color: ${theme[colorType]};
 
   &:hover {
@@ -29,6 +32,12 @@ const setColor = (theme: Theme, colorType: StyledButtonProps["colorType"]) => cs
 
   &:active {
     background-color: ${darken(0.1, theme[colorType])};
+  }
+
+  &:disabled {
+    border-color: ${isDefault(colorType) && lighten(0.15, theme.gray_light)};
+    color: ${isDefault(colorType) && lighten(0.6, theme.black)};
+    background-color: ${lighten(0.3, theme[colorType])};
   }
 `;
 

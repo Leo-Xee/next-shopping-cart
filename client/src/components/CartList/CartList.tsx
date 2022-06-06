@@ -46,6 +46,7 @@ function CartList() {
                 colorType="default"
                 size="default"
                 onClick={() => deleteSelectedCarts(selectedCartIdList)}
+                disabled={totalCount === 0}
               />
             </S.CheckController>
             <S.ListHeader>든든배송 상품 ({data?.length}개)</S.ListHeader>
