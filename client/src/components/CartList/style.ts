@@ -11,7 +11,7 @@ export const Title = styled.h1`
   text-align: center;
   font-size: 3rem;
   font-weight: 500;
-  border-bottom: 3px solid ${({ theme }) => theme.light.gray_dark};
+  border-bottom: 3px solid ${({ theme }) => theme.gray_dark};
 `;
 
 export const CheckController = styled.div`
@@ -21,14 +21,14 @@ export const CheckController = styled.div`
 
   & button {
     padding: 10px 15px;
-    border: 1px solid ${({ theme }) => theme.light.gray_light};
+    border: 1px solid ${({ theme }) => theme.gray_light};
   }
 `;
 
 export const ListHeader = styled.div`
   padding: 20px 0;
   font-size: 2rem;
-  border-bottom: 3px solid ${({ theme }) => theme.light.gray};
+  border-bottom: 3px solid ${({ theme }) => theme.gray};
 `;
 
 export const ListContainer = styled.div`

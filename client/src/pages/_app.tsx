@@ -3,7 +3,7 @@ import { ThemeProvider } from "@emotion/react";
 import { QueryClientProvider, QueryClient, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useState } from "react";
-import GlobalStyle from "@/styles/GobalStyle";
+import GlobalStyle from "@/styles/GlobalStyle";
 import theme from "@/styles/theme";
 import Layout from "@/components/Layout";
 import initMockAPI from "@/mocks";
@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme.light}>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
             <Layout>

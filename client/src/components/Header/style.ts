@@ -4,7 +4,7 @@ export const Wrapper = styled.header`
   position: fixed;
   width: 100%;
   height: 80px;
-  background-color: ${({ theme }) => theme.light.primary};
+  background-color: ${({ theme }) => theme.primary};
   z-index: 100;
 `;
 
@@ -12,8 +12,8 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: ${({ theme }) => theme.light.maxWidth};
-  min-width: ${({ theme }) => theme.light.minWidth};
+  max-width: ${({ theme }) => theme.maxWidth};
+  min-width: ${({ theme }) => theme.minWidth};
   margin: 0 auto;
   height: 100%;
 `;
@@ -22,7 +22,7 @@ export const Left = styled.div`
   display: flex;
   align-items: center;
   font-size: 2.5rem;
-  color: ${({ theme }) => theme.light.white};
+  color: ${({ theme }) => theme.white};
 
   & span {
     position: absolute;
@@ -38,7 +38,7 @@ export const Left = styled.div`
 `;
 export const Right = styled.div`
   font-size: 2rem;
-  color: ${({ theme }) => theme.light.white};
+  color: ${({ theme }) => theme.white};
 
   & button {
     margin-right: 20px;

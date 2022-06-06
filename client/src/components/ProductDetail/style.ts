@@ -9,7 +9,7 @@ export const Name = styled.div`
   padding: 20px 10px;
   font-size: 2.5rem;
   font-weight: 700;
-  border-bottom: 4px solid ${({ theme }) => theme.light.gray};
+  border-bottom: 4px solid ${({ theme }) => theme.gray};
 `;
 
 export const PriceContainer = styled.div`
@@ -25,6 +25,6 @@ export const CartButton = styled.button`
   padding: 10px;
   font-size: 3rem;
   font-weight: 500;
-  background-color: ${({ theme }) => theme.light.brown};
-  color: ${({ theme }) => theme.light.white};
+  background-color: ${({ theme }) => theme.brown};
+  color: ${({ theme }) => theme.white};
 `;

@@ -20,15 +20,15 @@ const SIZE = {
 };
 
 const setColor = (theme: Theme, colorType: StyledButtonProps["colorType"]) => css`
-  color: ${colorType !== "default" ? theme.light.white : theme.light.black};
-  background-color: ${theme.light[colorType]};
+  color: ${colorType !== "default" ? theme.white : theme.black};
+  background-color: ${theme[colorType]};
 
   &:hover {
-    background-color: ${lighten(0.1, `${theme.light[colorType]}`)};
+    background-color: ${lighten(0.1, theme[colorType])};
   }
 
   &:active {
-    background-color: ${darken(0.1, `${theme.light[colorType]}`)};
+    background-color: ${darken(0.1, theme[colorType])};
   }
 `;
 

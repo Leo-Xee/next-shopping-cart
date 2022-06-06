@@ -17,12 +17,12 @@ export const Label = styled.label`
     width: 25px;
     height: 25px;
     border-radius: 2px;
-    border: 2px solid ${({ theme }) => theme.light.primary};
+    border: 2px solid ${({ theme }) => theme.primary};
     cursor: pointer;
   }
 
   & input[type="checkbox"]:checked + span {
-    background-color: ${({ theme }) => theme.light.primary};
+    background-color: ${({ theme }) => theme.primary};
   }
 
   & input[type="checkbox"]:checked + span::before {
@@ -31,7 +31,7 @@ export const Label = styled.label`
     top: 11px;
     width: 10px;
     height: 4px;
-    background-color: ${({ theme }) => theme.light.white};
+    background-color: ${({ theme }) => theme.white};
 
     transform: rotate(45deg);
   }
@@ -43,7 +43,7 @@ export const Label = styled.label`
     left: 11px;
     width: 4px;
     height: 18px;
-    background-color: ${({ theme }) => theme.light.white};
+    background-color: ${({ theme }) => theme.white};
     transform: rotate(45deg);
   }
 
