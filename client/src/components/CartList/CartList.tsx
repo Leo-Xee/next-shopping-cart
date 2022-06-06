@@ -10,11 +10,9 @@ import ErrorBanner from "../common/ErrorBanner";
 import useCalcCartList from "@/hooks/useCalcCartList";
 import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
 import Indicator from "../Indicator";
-import { filterPrice } from "@/shared/utils/filter";
 import Button from "../common/Button";
 import Title from "../common/Title/Title";
 
-// SSR 확인하기
 function CartList() {
   const router = useRouter();
   const { isLoading, isError, data } = useQuery("/carts", cartService.getCarts);
@@ -59,7 +57,7 @@ function CartList() {
             <Indicator
               title="결제예상금액"
               itemName="총 결제예상금액"
-              itemPrice={`${filterPrice(totalPrice)}`}
+              itemPrice={totalPrice}
               buttonName={`주문하기(${totalCount}개)`}
               onClick={() => router.push("/order")}
             />
