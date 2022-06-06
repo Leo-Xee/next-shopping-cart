@@ -2,15 +2,6 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.light.gray_light};
-
-  & button {
-    padding: 20px 10px;
-    width: 100%;
-    background-color: ${({ theme }) => theme.light.primary};
-    color: ${({ theme }) => theme.light.white};
-    font-size: 2rem;
-    font-weight: 500;
-  }
 `;
 
 export const ResultTitle = styled.div`
@@ -32,6 +23,6 @@ export const ResultInfo = styled.div`
   padding-bottom: 60px;
 
   & span {
-    box-shadow: inset 0 -10px ${({ theme }) => theme.light.primary_light};
+    box-shadow: inset 0 -10px ${({ theme }) => theme.light.primary_highlight};
   }
 `;

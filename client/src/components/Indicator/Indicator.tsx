@@ -1,3 +1,4 @@
+import Button from "../common/Button";
 import * as S from "./style";
 
 type IndicatorProps = {
@@ -17,9 +18,7 @@ function Indicator({ title, itemName, itemPrice, buttonName, onClick }: Indicato
           <span>{itemName}</span>
           <span>{itemPrice}원</span>
         </S.ResultInfo>
-        <button type="button" onClick={onClick}>
-          {buttonName}
-        </button>
+        <Button buttonName={buttonName} onClick={onClick} colorType="primary" size="full" />
       </S.ResultContainer>
     </S.Container>
   );

@@ -28,7 +28,7 @@ export const CheckController = styled.div`
 export const ListHeader = styled.div`
   padding: 20px 0;
   font-size: 2rem;
-  border-bottom: 3px solid ${({ theme }) => theme.light.gray_medium};
+  border-bottom: 3px solid ${({ theme }) => theme.light.gray};
 `;
 
 export const ListContainer = styled.div`

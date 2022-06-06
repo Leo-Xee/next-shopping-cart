@@ -8,6 +8,7 @@ import * as S from "./style";
 import Spinner from "../common/Spinner";
 import ErrorBanner from "../common/ErrorBanner";
 import cartService from "@/services/cartService";
+import Button from "../common/Button";
 
 function ProductDetail() {
   const router = useRouter();
@@ -37,9 +38,7 @@ function ProductDetail() {
               <span>금액</span>
               <span>{filterPrice(data.price)}원</span>
             </S.PriceContainer>
-            <S.CartButton type="button" onClick={addCartHandler}>
-              장바구니
-            </S.CartButton>
+            <Button buttonName="장바구니" colorType="brown" size="full" onClick={addCartHandler} />
           </S.Container>
         )
       )}

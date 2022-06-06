@@ -11,6 +11,7 @@ import useCalcCartList from "@/hooks/useCalcCartList";
 import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
 import Indicator from "../Indicator";
 import { filterPrice } from "@/shared/utils/filter";
+import Button from "../common/Button";
 
 // SSR 확인하기
 function CartList() {
@@ -40,9 +41,12 @@ function CartList() {
                 disabled={isEmpty}
                 label={isSelectedAll ? "전체 해제" : "전체 선택"}
               />
-              <button type="button" onClick={() => deleteSelectedCarts(selectedCartIdList)}>
-                상품 삭제
-              </button>
+              <Button
+                buttonName="상품 삭제"
+                colorType="default"
+                size="default"
+                onClick={() => deleteSelectedCarts(selectedCartIdList)}
+              />
             </S.CheckController>
             <S.ListHeader>든든배송 상품 ({data?.length}개)</S.ListHeader>
             <ul>
