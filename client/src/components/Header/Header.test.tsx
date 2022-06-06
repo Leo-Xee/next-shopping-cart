@@ -46,12 +46,12 @@ describe("<Header />", () => {
       expect(router.push).toHaveBeenCalledWith("/cart");
     });
 
-    it("주문목록를 클릭하면 '/order'로 이동한다.", async () => {
+    it("주문목록를 클릭하면 '/orderList'로 이동한다.", async () => {
       const router = createMockRouter({});
       const { orderButton } = renderHeader(router);
 
       await userEvent.click(orderButton());
-      expect(router.push).toHaveBeenCalledWith("/order");
+      expect(router.push).toHaveBeenCalledWith("/orderList");
     });
   });
 });

@@ -20,7 +20,7 @@ function Header() {
           <button type="button" onClick={() => router.push("/cart")}>
             장바구니
           </button>
-          <button type="button" onClick={() => router.push("/order")}>
+          <button type="button" onClick={() => router.push("/orderList")}>
             주문목록
           </button>
         </S.Right>
