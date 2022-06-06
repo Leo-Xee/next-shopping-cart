@@ -12,6 +12,7 @@ import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
 import Indicator from "../Indicator";
 import { filterPrice } from "@/shared/utils/filter";
 import Button from "../common/Button";
+import Title from "../common/Title/Title";
 
 // SSR 확인하기
 function CartList() {
@@ -25,7 +26,7 @@ function CartList() {
 
   return (
     <>
-      <S.Title>장바구니</S.Title>
+      <Title title="장바구니" />
       {isLoading ? (
         <Spinner message="로딩 중..." />
       ) : isError ? (
