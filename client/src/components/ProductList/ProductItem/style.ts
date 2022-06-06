@@ -5,7 +5,17 @@ export const Container = styled.div`
   box-shadow: 0 0 5px ${({ theme }) => theme.box_shadow_color};
 
   &:hover {
-    text-decoration: underline;
+    .name {
+      text-decoration: underline;
+    }
+  }
+
+  & img {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover img {
+    transform: scale(1.2);
   }
 `;
 
@@ -21,6 +31,11 @@ export const Info = styled.div`
 export const CartButton = styled.button`
   flex: 1;
   padding: 15px;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 export const Name = styled.div`

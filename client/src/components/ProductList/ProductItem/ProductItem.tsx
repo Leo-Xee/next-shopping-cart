@@ -27,7 +27,7 @@ function ProductItem({ data }: ProductItemProps) {
             <Image src={data.imageUrl} alt={data.name} width="282px" height="282px" />
             <S.InfoContainer>
               <S.Info>
-                <S.Name>{filterName(data.name)}</S.Name>
+                <S.Name className="name">{filterName(data.name)}</S.Name>
                 <S.Price>{filterPrice(data.price)}원</S.Price>
               </S.Info>
               <S.CartButton
