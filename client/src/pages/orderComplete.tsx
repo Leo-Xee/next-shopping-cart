@@ -20,7 +20,7 @@ const ButtonContainer = styled.div`
   gap: 20px;
 `;
 
-function OrderComplete() {
+function OrderCompletePage() {
   const router = useRouter();
 
   return (
@@ -45,4 +45,4 @@ function OrderComplete() {
   );
 }
 
-export default OrderComplete;
+export default OrderCompletePage;

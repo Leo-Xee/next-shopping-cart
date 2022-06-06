@@ -4,7 +4,7 @@ import { dehydrate, QueryClient } from "react-query";
 import OrderList from "@/components/OrderList";
 import cartService from "@/services/cartService";
 
-function Order() {
+function OrderPage() {
   return (
     <main>
       <OrderList />
@@ -22,4 +22,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   };
 };
-export default Order;
+export default OrderPage;
