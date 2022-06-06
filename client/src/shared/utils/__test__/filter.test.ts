@@ -5,7 +5,7 @@ const bigNumber = 1000000000000;
 
 describe("filterName", () => {
   it("return filterd Name", () => {
-    expect(filterName(longName)).toBe("젓가락(종이)-웬만해선 이 맛을 막을 ...");
+    expect(filterName(longName)).toBe("젓가락(종이)-웬만해선 이 맛을...");
   });
 });
 

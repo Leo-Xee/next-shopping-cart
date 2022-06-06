@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 
 function AllTheProviders({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme.light}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </ThemeProvider>
   );
