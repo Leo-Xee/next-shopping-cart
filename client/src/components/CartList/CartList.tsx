@@ -6,15 +6,16 @@ import cartService from "@/services/cartService";
 import CartItem from "./CartItem";
 import Checkbox from "../common/Checkbox/Checkbox";
 import useCalcCartList from "@/hooks/useCalcCartList";
-import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
 import Indicator from "../Indicator";
 import Button from "../common/Button";
 import Title from "../common/Title/Title";
+import useCartMutation from "@/hooks/apis/useCartMutation";
 
 function CartList() {
   const router = useRouter();
+
   const { data } = useQuery("/carts", cartService.getCarts);
-  const { updateSelectedAll, deleteSelectedCarts } = useCartListMutation();
+  const { updateSelectedAll, deleteSelectedCarts } = useCartMutation();
 
   const { totalPrice, totalCount, isEmpty, isSelectedAll, selectedCartIdList } = useCalcCartList(
     data ?? [],

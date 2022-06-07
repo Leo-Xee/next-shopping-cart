@@ -6,7 +6,7 @@ import * as S from "./style";
 import { Cart } from "@/@types/api";
 import Checkbox from "@/components/common/Checkbox/Checkbox";
 import { filterPrice } from "@/shared/utils/filter";
-import useCartItemMutation from "@/hooks/apis/cart/useCartItemMutation";
+import useCartItemMutation from "@/hooks/apis/useCartMutation";
 
 type CartItemProps = {
   cartItem: Cart;
@@ -15,12 +15,15 @@ type CartItemProps = {
 function CartItem({ cartItem }: CartItemProps) {
   const { id, name, imageUrl, price, quantity, selected } = cartItem.product;
 
-  const { increseQuantity, decreseQuantity, updateSelected, deleteCart } =
-    useCartItemMutation(cartItem);
+  const { increseQuantity, decreseQuantity, updateSelected, deleteCart } = useCartItemMutation();
 
   return (
     <S.Container>
-      <Checkbox id={`check__${name}`} onChange={() => updateSelected()} checked={selected} />
+      <Checkbox
+        id={`check__${name}`}
+        onChange={() => updateSelected(cartItem)}
+        checked={selected}
+      />
       <Link href={`/products/${id}`}>
         <a>
           <S.LinkContainer>
@@ -30,16 +33,24 @@ function CartItem({ cartItem }: CartItemProps) {
         </a>
       </Link>
       <S.Controllor>
-        <button type="button" aria-label={`${name} 상품 삭제하기`} onClick={() => deleteCart()}>
+        <button
+          type="button"
+          aria-label={`${name} 상품 삭제하기`}
+          onClick={() => deleteCart(cartItem)}
+        >
           <BsTrash size={25} />
         </button>
         <S.QuantityContainer>
           <S.Quantity>{quantity}</S.Quantity>
           <S.QuantityCotrollor>
-            <button type="button" onClick={() => increseQuantity()}>
+            <button type="button" onClick={() => increseQuantity(cartItem)}>
               +
             </button>
-            <button type="button" onClick={() => decreseQuantity()} disabled={quantity <= 1}>
+            <button
+              type="button"
+              onClick={() => decreseQuantity(cartItem)}
+              disabled={quantity <= 1}
+            >
               -
             </button>
           </S.QuantityCotrollor>
