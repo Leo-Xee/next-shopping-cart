@@ -80,12 +80,6 @@ const products: Product[] = [
     imageUrl:
       "https://cdn-mart.baemin.com/sellergoods/main/5297837f-5ecd-4945-be2f-4a75854cd06e.jpg",
   },
-  {
-    id: 1653959608134,
-    price: 83700,
-    name: "냉면용기(대)",
-    imageUrl: "https://cdn-mart.baemin.com/goods/2/1556008840639m0.jpg",
-  },
 ];
 
 export default products;
