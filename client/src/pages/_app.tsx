@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { useState } from "react";
 import GlobalStyle from "@/styles/GlobalStyle";
 import theme from "@/styles/theme";
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout";
 import initMockAPI from "@/mocks";
 
 if (process.env.NODE_ENV === "development") {
