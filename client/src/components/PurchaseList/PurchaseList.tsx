@@ -7,8 +7,8 @@ import cartService from "@/services/cartService";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import useCalcCartList from "@/hooks/useCalcCartList";
-import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
-import useOrderMutation from "@/hooks/apis/order/useOrderMutation";
+import useCartMutation from "@/hooks/apis/useCartMutation";
+import useOrderMutation from "@/hooks/apis/useOrderMutation";
 import PurchaseItem from "./PurchaseItem";
 
 function PurchaseList() {
@@ -17,7 +17,7 @@ function PurchaseList() {
   const { data } = useQuery("/carts", cartService.getCarts, {
     select: (carts) => carts.filter((cart) => cart.product.selected),
   });
-  const { deleteSelectedCarts } = useCartListMutation();
+  const { deleteSelectedCarts } = useCartMutation();
   const { addOrder } = useOrderMutation();
   const { purchaseList, totalPrice, selectedCartIdList } = useCalcCartList(data ?? []);
 
