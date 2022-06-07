@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 
 import cartService from "@/services/cartService";
-import { Cart } from "@/@types/api";
+import { Cart, Product } from "@/@types/api";
 
 function useCartMutation() {
   const queryClient = useQueryClient();
@@ -11,6 +11,7 @@ function useCartMutation() {
       queryClient.invalidateQueries("/carts");
     },
   };
+  const addCartMutation = useMutation((product: Product) => cartService.addCart(product), option);
 
   const increseQuantityMutation = useMutation(
     (cartItem: Cart) => cartService.updateCartQuantity(cartItem.id, cartItem.product.quantity + 1),
@@ -43,6 +44,7 @@ function useCartMutation() {
   );
 
   return {
+    addCart: (product: Product) => addCartMutation.mutate(product),
     increseQuantity: (cartItem: Cart) => increseQuantityMutation.mutate(cartItem),
     decreseQuantity: (cartItem: Cart) => decreseQuantityMutation.mutate(cartItem),
     updateSelected: (cartItem: Cart) => updateCartSelectedMutation.mutate(cartItem),

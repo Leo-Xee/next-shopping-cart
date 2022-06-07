@@ -1,22 +1,23 @@
+import { MouseEvent } from "react";
 import { BsCart4 } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 import { Product } from "@/@types/api";
 import * as S from "./style";
 import { filterName, filterPrice } from "@/shared/utils/filter";
-import cartService from "@/services/cartService";
+import useCartMutation from "@/hooks/apis/useCartMutation";
 
 type ProductItemProps = {
   data: Product;
 };
 
 function ProductItem({ data }: ProductItemProps) {
-  const addCartHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const { addCart } = useCartMutation();
+
+  const addCartHandler = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!data) return;
-    cartService.addCart(data);
+    addCart(data);
   };
 
   return (

@@ -5,8 +5,8 @@ import Image from "next/image";
 import productService from "@/services/productService";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
-import cartService from "@/services/cartService";
 import Button from "../common/Button";
+import useCartMutation from "@/hooks/apis/useCartMutation";
 
 function ProductDetail() {
   const router = useRouter();
@@ -15,11 +15,7 @@ function ProductDetail() {
   const { data } = useQuery(["/product", productId], () =>
     productService.getProduct(String(productId)),
   );
-
-  const addCartHandler = () => {
-    if (!data) return;
-    cartService.addCart(data);
-  };
+  const { addCart } = useCartMutation();
 
   return (
     <div>
@@ -31,7 +27,12 @@ function ProductDetail() {
             <span>금액</span>
             <span>{filterPrice(data.price)}원</span>
           </S.PriceContainer>
-          <Button buttonName="장바구니" colorType="brown" size="full" onClick={addCartHandler} />
+          <Button
+            buttonName="장바구니"
+            colorType="brown"
+            size="full"
+            onClick={() => addCart(data)}
+          />
         </S.Container>
       )}
     </div>

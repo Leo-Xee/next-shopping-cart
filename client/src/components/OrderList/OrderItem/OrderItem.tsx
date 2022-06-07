@@ -4,6 +4,7 @@ import { Order } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import Button from "@/components/common/Button";
+import useCartMutation from "@/hooks/apis/useCartMutation";
 
 type OrderItemProps = {
   orderItem: Order;
@@ -12,7 +13,7 @@ type OrderItemProps = {
 function OrderItem({ orderItem }: OrderItemProps) {
   const { id, orderDetails } = orderItem;
 
-  const addCartHanlder = () => {};
+  const { addCart } = useCartMutation();
 
   return (
     <S.Container>
@@ -35,7 +36,7 @@ function OrderItem({ orderItem }: OrderItemProps) {
                 buttonName="장바구니"
                 colorType="primary"
                 size="full"
-                onClick={addCartHanlder}
+                onClick={() => addCart({ id: productId, name, price, imageUrl })}
               />
             </S.ButtonWrapper>
           </S.DetailItem>
