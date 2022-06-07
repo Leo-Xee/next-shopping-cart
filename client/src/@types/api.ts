@@ -26,11 +26,11 @@ export interface Cart {
   /orders
 */
 
-export interface OrderItem extends Product {
+export interface OrderItemType extends Product {
   quantity: number;
 }
 
 export interface Order {
   id: number;
-  orderDetails: OrderItem[];
+  orderDetails: OrderItemType[];
 }
