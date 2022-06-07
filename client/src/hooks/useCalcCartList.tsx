@@ -12,7 +12,7 @@ function useCalcCartList(cartList: Cart[]) {
     return cartIdList;
   };
 
-  const orderList: OrderItemType[] = cartList.map((cart) => {
+  const purchaseList: OrderItemType[] = cartList.map((cart) => {
     return {
       id: cart.product.id,
       name: cart.product.name,
@@ -48,7 +48,7 @@ function useCalcCartList(cartList: Cart[]) {
   return {
     totalPrice,
     totalCount,
-    orderList,
+    purchaseList,
     isEmpty: isEmpty(),
     isSelectedAll: isSelectedAll(),
     selectedCartIdList: calcSelectedCartIdList(),

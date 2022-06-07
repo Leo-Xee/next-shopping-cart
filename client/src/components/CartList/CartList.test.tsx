@@ -47,6 +47,6 @@ describe("<CartList />", () => {
 
     fireEvent.click(orderButton);
 
-    expect(router.push).toHaveBeenCalledWith("/order");
+    expect(router.push).toHaveBeenCalledWith("/purchase");
   });
 });

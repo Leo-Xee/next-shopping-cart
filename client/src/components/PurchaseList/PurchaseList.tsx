@@ -9,9 +9,9 @@ import * as S from "./style";
 import useCalcCartList from "@/hooks/useCalcCartList";
 import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
 import useOrderMutation from "@/hooks/apis/order/useOrderMutation";
-import OrderItem from "./OrderItem";
+import PurchaseItem from "./PurchaseItem";
 
-function OrderList() {
+function PurchaseList() {
   const router = useRouter();
 
   const { data } = useQuery("/carts", cartService.getCarts, {
@@ -19,13 +19,13 @@ function OrderList() {
   });
   const { deleteSelectedCarts } = useCartListMutation();
   const { addOrder } = useOrderMutation();
-  const { orderList, totalPrice, selectedCartIdList } = useCalcCartList(data ?? []);
+  const { purchaseList, totalPrice, selectedCartIdList } = useCalcCartList(data ?? []);
 
   const orderSelectedCarts = () => {
     deleteSelectedCarts(selectedCartIdList);
-    addOrder(orderList);
+    addOrder(purchaseList);
 
-    router.push("/orderComplete");
+    router.push("/purchaseComplete");
   };
 
   return (
@@ -36,7 +36,7 @@ function OrderList() {
           <S.ListHeader>주문 상품 ({data?.length}개)</S.ListHeader>
           <ul>
             {data?.map((selectedCart) => (
-              <OrderItem key={selectedCart.id} cartItem={selectedCart} />
+              <PurchaseItem key={selectedCart.id} cartItem={selectedCart} />
             ))}
           </ul>
         </S.ListContainer>
@@ -54,4 +54,4 @@ function OrderList() {
   );
 }
 
-export default OrderList;
+export default PurchaseList;

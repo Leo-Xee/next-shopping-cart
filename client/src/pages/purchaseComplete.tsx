@@ -20,7 +20,7 @@ const ButtonContainer = styled.div`
   gap: 20px;
 `;
 
-function OrderCompletePage() {
+function PurchaseCompletePage() {
   const router = useRouter();
 
   return (
@@ -38,11 +38,11 @@ function OrderCompletePage() {
           buttonName="주문상세"
           colorType="primary"
           size="full"
-          onClick={() => router.push("/orderDetail")}
+          onClick={() => router.push("/orders")}
         />
       </ButtonContainer>
     </Container>
   );
 }
 
-export default OrderCompletePage;
+export default PurchaseCompletePage;

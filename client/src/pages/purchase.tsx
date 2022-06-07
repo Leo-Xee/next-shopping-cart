@@ -1,13 +1,13 @@
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient } from "react-query";
 
-import OrderList from "@/components/OrderList";
+import PurchaseList from "@/components/PurchaseList";
 import cartService from "@/services/cartService";
 
-function OrderPage() {
+function PurchasePage() {
   return (
     <main>
-      <OrderList />
+      <PurchaseList />
     </main>
   );
 }
@@ -22,4 +22,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   };
 };
-export default OrderPage;
+export default PurchasePage;

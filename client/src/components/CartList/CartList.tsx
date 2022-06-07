@@ -52,7 +52,7 @@ function CartList() {
             itemName="총 결제예상금액"
             itemPrice={totalPrice}
             buttonName={`주문하기(${totalCount}개)`}
-            onClick={() => router.push("/order")}
+            onClick={() => router.push("/purchase")}
           />
         </S.IndicatorWrapper>
       </S.Container>

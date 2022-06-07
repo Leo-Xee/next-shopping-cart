@@ -4,11 +4,11 @@ import * as S from "./style";
 import { Cart } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
 
-type OrderItemProps = {
+type PurchaseItemProps = {
   cartItem: Cart;
 };
 
-function OrderItem({ cartItem }: OrderItemProps) {
+function PurchaseItem({ cartItem }: PurchaseItemProps) {
   const { name, price, imageUrl, quantity } = cartItem.product;
   return (
     <S.Container>
@@ -23,4 +23,4 @@ function OrderItem({ cartItem }: OrderItemProps) {
   );
 }
 
-export default OrderItem;
+export default PurchaseItem;
