@@ -14,9 +14,9 @@ const SIZE = {
     font-weight: 400;
   `,
   full: css`
-    padding: 16px 12px;
+    padding: 12px 10px;
     width: 100%;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 500;
   `,
 };
