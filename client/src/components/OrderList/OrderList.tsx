@@ -6,16 +6,27 @@ import Indicator from "@/components/Indicator";
 import cartService from "@/services/cartService";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
-import OrderItem from "./OrderItem";
 import useCalcCartList from "@/hooks/useCalcCartList";
+import useCartListMutation from "@/hooks/apis/cart/useCartListMutation";
+import useOrderMutation from "@/hooks/apis/order/useOrderMutation";
+import OrderItem from "./OrderItem";
 
 function OrderList() {
   const router = useRouter();
+
   const { data } = useQuery("/carts", cartService.getCarts, {
     select: (carts) => carts.filter((cart) => cart.product.selected),
   });
+  const { deleteSelectedCarts } = useCartListMutation();
+  const { addOrder } = useOrderMutation();
+  const { orderList, totalPrice, selectedCartIdList } = useCalcCartList(data ?? []);
 
-  const { totalPrice } = useCalcCartList(data ?? []);
+  const orderSelectedCarts = () => {
+    deleteSelectedCarts(selectedCartIdList);
+    addOrder(orderList);
+
+    router.push("/orderComplete");
+  };
 
   return (
     <>
@@ -35,7 +46,7 @@ function OrderList() {
             itemName="총 결제금액"
             itemPrice={totalPrice}
             buttonName={`${filterPrice(totalPrice)}원 결제하기`}
-            onClick={() => router.push("/orderComplete")}
+            onClick={orderSelectedCarts}
           />
         </S.IndicatorWrapper>
       </S.Container>

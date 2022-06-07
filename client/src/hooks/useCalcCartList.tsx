@@ -1,4 +1,4 @@
-import { Cart } from "@/@types/api";
+import { Cart, OrderItemType } from "@/@types/api";
 
 function useCalcCartList(cartList: Cart[]) {
   const calcSelectedCartIdList = (): number[] => {
@@ -11,6 +11,16 @@ function useCalcCartList(cartList: Cart[]) {
     });
     return cartIdList;
   };
+
+  const orderList: OrderItemType[] = cartList.map((cart) => {
+    return {
+      id: cart.product.id,
+      name: cart.product.name,
+      price: cart.product.price,
+      quantity: cart.product.id,
+      imageUrl: cart.product.imageUrl,
+    };
+  });
 
   const totalPrice = cartList.reduce((prev, cur) => {
     if (cur.product.selected) {
@@ -38,6 +48,7 @@ function useCalcCartList(cartList: Cart[]) {
   return {
     totalPrice,
     totalCount,
+    orderList,
     isEmpty: isEmpty(),
     isSelectedAll: isSelectedAll(),
     selectedCartIdList: calcSelectedCartIdList(),
