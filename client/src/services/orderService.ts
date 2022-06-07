@@ -1,9 +1,9 @@
-import { OrderItemType } from "@/@types/api";
+import { Order, OrderItemType } from "@/@types/api";
 import fetcher from "@/shared/utils/fetcher";
 
 const orderService = {
   getOrders: async () => {
-    const data = await fetcher("get", "/orders");
+    const data = await fetcher<Order[]>("get", "/orders");
     return data;
   },
   addOrder: async (orderDetails: OrderItemType[]) => {
