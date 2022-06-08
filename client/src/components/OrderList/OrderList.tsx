@@ -21,8 +21,8 @@ function OrderList() {
       <List>
         {data &&
           data.map((order) => (
-            <li>
-              <OrderItem key={order.id} orderItem={order} type="list" />
+            <li key={order.id}>
+              <OrderItem orderItem={order} type="list" />
             </li>
           ))}
       </List>
