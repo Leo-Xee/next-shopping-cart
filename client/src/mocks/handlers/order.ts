@@ -11,6 +11,17 @@ const orderHandler = [
   }),
 
   /**
+   * 단일 주문 조회
+   */
+  rest.get(`${BASE_URL}/orders/:orderId`, (req, res, ctx) => {
+    const { orderId } = req.params;
+
+    const targetOrder = orders.find((order) => order.id === Number(orderId));
+
+    return res(ctx.status(200), ctx.json(targetOrder));
+  }),
+
+  /**
    * 주문 추가
    */
   rest.post<PostOrderBody>(`${BASE_URL}/orders`, (req, res, ctx) => {
