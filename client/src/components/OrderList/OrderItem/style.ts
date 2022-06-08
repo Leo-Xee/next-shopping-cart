@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-  border: 1px solid #aaaaaa;
+  border: 1px solid ${({ theme }) => theme.gray_light};
 `;
 
 export const Header = styled.div`
@@ -9,7 +9,7 @@ export const Header = styled.div`
   justify-content: space-between;
   padding: 20px;
   font-size: 1.8rem;
-  background-color: #f6f6f6;
+  background-color: ${({ theme }) => theme.gray_lightest};
 
   & button:hover {
     text-decoration: underline;
@@ -19,7 +19,7 @@ export const Header = styled.div`
 export const DetailItem = styled.li`
   display: flex;
   padding: 20px;
-  border-top: 1px solid #aaaaaa;
+  border-top: 1px solid ${({ theme }) => theme.gray_light};
 `;
 
 export const Anchor = styled.a`
@@ -44,7 +44,7 @@ export const Name = styled.div`
 `;
 
 export const Price = styled.div`
-  color: #888888;
+  color: ${({ theme }) => theme.gray};
   font-size: 1.8rem;
 `;
 export const ButtonWrapper = styled.div`
