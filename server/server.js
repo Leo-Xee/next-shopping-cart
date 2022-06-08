@@ -237,6 +237,22 @@ server.get("/orders", (req, res) => {
   res.status(200).json(db.get("orders"));
 });
 
+/** 단일 주문 조회 */
+server.get("/orders/:orderId", (req, res) => {
+  const { orderId } = req.params;
+
+  if (!Number(orderId)) {
+    res.statusCode(400);
+  }
+
+  const target = db
+    .get("orders")
+    .find((order) => order.id === Number(orderId))
+    .value();
+
+  res.status(200).json(target);
+});
+
 /** 주문 추가 */
 server.post("/orders", (req, res) => {
   const { orderDetails } = req.body;
