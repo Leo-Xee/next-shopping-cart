@@ -16,19 +16,26 @@ export const Header = styled.div`
   }
 `;
 
-export const DetailList = styled.ul``;
-
 export const DetailItem = styled.li`
   display: flex;
   padding: 20px;
   border-top: 1px solid #aaaaaa;
 `;
 
+export const Anchor = styled.a`
+  display: flex;
+  flex: 8;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  flex: 8;
   padding-left: 20px;
 `;
 

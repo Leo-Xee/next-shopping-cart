@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import Link from "next/link";
 import { Order } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
@@ -21,16 +22,20 @@ function OrderItem({ orderItem }: OrderItemProps) {
         <span>주문번호 : {id}</span>
         <button type="button">상세 보기</button>
       </S.Header>
-      <S.DetailList>
+      <ul>
         {orderDetails.map(({ id: productId, name, price, quantity, imageUrl }) => (
           <S.DetailItem key={productId}>
-            <Image src={imageUrl} alt={name} height="200px" width="200px" />
-            <S.Info>
-              <S.Name>{name}</S.Name>
-              <S.Price>
-                {filterPrice(price * quantity)} 원 / {quantity} 개
-              </S.Price>
-            </S.Info>
+            <Link href={`/products/${productId}`}>
+              <S.Anchor>
+                <Image src={imageUrl} alt={name} height="200px" width="200px" />
+                <S.Info>
+                  <S.Name>{name}</S.Name>
+                  <S.Price>
+                    {filterPrice(price * quantity)} 원 / {quantity} 개
+                  </S.Price>
+                </S.Info>
+              </S.Anchor>
+            </Link>
             <S.ButtonWrapper>
               <Button
                 buttonName="장바구니"
@@ -41,7 +46,7 @@ function OrderItem({ orderItem }: OrderItemProps) {
             </S.ButtonWrapper>
           </S.DetailItem>
         ))}
-      </S.DetailList>
+      </ul>
     </S.Container>
   );
 }
