@@ -18,7 +18,14 @@ function OrderList() {
   return (
     <>
       <Title title="주문목록" />
-      <List>{data && data.map((order) => <OrderItem key={order.id} orderItem={order} />)}</List>
+      <List>
+        {data &&
+          data.map((order) => (
+            <li>
+              <OrderItem key={order.id} orderItem={order} type="list" />
+            </li>
+          ))}
+      </List>
     </>
   );
 }

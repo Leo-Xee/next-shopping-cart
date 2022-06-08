@@ -1,6 +1,7 @@
 import Image from "next/image";
-
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 import { Order } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
@@ -9,9 +10,11 @@ import useCartMutation from "@/hooks/apis/useCartMutation";
 
 type OrderItemProps = {
   orderItem: Order;
+  type: "list" | "detail";
 };
 
-function OrderItem({ orderItem }: OrderItemProps) {
+function OrderItem({ orderItem, type }: OrderItemProps) {
+  const router = useRouter();
   const { id, orderDetails } = orderItem;
 
   const { addCart } = useCartMutation();
@@ -20,7 +23,11 @@ function OrderItem({ orderItem }: OrderItemProps) {
     <S.Container>
       <S.Header>
         <span>주문번호 : {id}</span>
-        <button type="button">상세 보기</button>
+        {type === "list" && (
+          <button type="button" onClick={() => router.push(`/orders/${id}`)}>
+            상세 보기
+          </button>
+        )}
       </S.Header>
       <ul>
         {orderDetails.map(({ id: productId, name, price, quantity, imageUrl }) => (
