@@ -10,6 +10,7 @@ import useCalcCartList from "@/hooks/useCalcCartList";
 import useCartMutation from "@/hooks/apis/useCartMutation";
 import useOrderMutation from "@/hooks/apis/useOrderMutation";
 import PurchaseItem from "./PurchaseItem";
+import Button from "../common/Button";
 
 function PurchaseList() {
   const router = useRouter();
@@ -41,13 +42,14 @@ function PurchaseList() {
           </ul>
         </S.ListContainer>
         <S.IndicatorWrapper>
-          <Indicator
-            title="결제금액"
-            itemName="총 결제금액"
-            itemPrice={totalPrice}
-            buttonName={`${filterPrice(totalPrice)}원 결제하기`}
-            onClick={orderSelectedCarts}
-          />
+          <Indicator title="결제금액" itemName="총 결제금액" itemPrice={totalPrice}>
+            <Button
+              buttonName={`${filterPrice(totalPrice)}원 결제하기`}
+              colorType="primary"
+              size="full"
+              onClick={orderSelectedCarts}
+            />
+          </Indicator>
         </S.IndicatorWrapper>
       </S.Container>
     </>

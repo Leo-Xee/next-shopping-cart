@@ -42,19 +42,21 @@ function CartList() {
               disabled={totalCount === 0}
             />
           </S.CheckController>
-          <S.ListHeader>든든배송 상품 ({data?.length}개)</S.ListHeader>
+          <S.ListHeader>든든배송 상품 ({data?.length || 0}개)</S.ListHeader>
           <ul>
             {data && data.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
           </ul>
         </S.ListContainer>
         <S.IndicatorWrapper>
-          <Indicator
-            title="결제예상금액"
-            itemName="총 결제예상금액"
-            itemPrice={totalPrice}
-            buttonName={`주문하기(${totalCount}개)`}
-            onClick={() => router.push("/purchase")}
-          />
+          <Indicator title="결제예상금액" itemName="총 결제예상금액" itemPrice={totalPrice}>
+            <Button
+              buttonName={`주문하기(${totalCount}개)`}
+              colorType="primary"
+              size="full"
+              disabled={totalCount === 0}
+              onClick={() => router.push("/purchase")}
+            />
+          </Indicator>
         </S.IndicatorWrapper>
       </S.Container>
     </>

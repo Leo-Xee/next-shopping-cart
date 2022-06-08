@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.div`
+export const Container = styled.div<{ width: string }>`
+  width: ${({ width }) => width};
   border: 1px solid ${({ theme }) => theme.gray_light};
 `;
 
@@ -20,7 +21,7 @@ export const ResultInfo = styled.div`
   justify-content: space-between;
   font-size: 2rem;
   font-weight: 700;
-  padding-bottom: 60px;
+  margin-bottom: 40px;
 
   & span {
     box-shadow: inset 0 -10px ${({ theme }) => theme.primary_highlight};
