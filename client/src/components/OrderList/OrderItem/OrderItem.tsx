@@ -2,11 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { Order } from "@/@types/api";
+import { Order, Product } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import Button from "@/components/common/Button";
 import useCartMutation from "@/hooks/apis/useCartMutation";
+import useSnackBar from "@/hooks/useSnackBar";
+import SnackBar from "@/components/common/SnackBar";
 
 type OrderItemProps = {
   orderItem: Order;
@@ -16,8 +18,14 @@ type OrderItemProps = {
 function OrderItem({ orderItem, type }: OrderItemProps) {
   const router = useRouter();
   const { id, orderDetails } = orderItem;
+  const { isShowing, setIsShowing } = useSnackBar(1.5);
 
   const { addCart } = useCartMutation();
+
+  const addCartHandler = (product: Product) => {
+    addCart(product);
+    setIsShowing(true);
+  };
 
   return (
     <S.Container>
@@ -48,12 +56,13 @@ function OrderItem({ orderItem, type }: OrderItemProps) {
                 buttonName="장바구니"
                 colorType="primary"
                 size="full"
-                onClick={() => addCart({ id: productId, name, price, imageUrl })}
+                onClick={() => addCartHandler({ id: productId, name, price, imageUrl })}
               />
             </S.ButtonWrapper>
           </S.DetailItem>
         ))}
       </ul>
+      {isShowing && <SnackBar message="상품이 장바구니에 추가되었습니다." duration={1.5} />}
     </S.Container>
   );
 }

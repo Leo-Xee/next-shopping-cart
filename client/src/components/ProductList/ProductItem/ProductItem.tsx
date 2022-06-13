@@ -7,21 +7,26 @@ import { Product } from "@/@types/api";
 import * as S from "./style";
 import { filterName, filterPrice } from "@/shared/utils/filter";
 import useCartMutation from "@/hooks/apis/useCartMutation";
+import SnackBar from "@/components/common/SnackBar";
+import useSnackBar from "@/hooks/useSnackBar";
 
 type ProductItemProps = {
   data: Product;
 };
 
 function ProductItem({ data }: ProductItemProps) {
+  const { isShowing, setIsShowing } = useSnackBar(1.5);
   const { addCart } = useCartMutation();
 
   const addCartHandler = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     addCart(data);
+    setIsShowing(true);
   };
 
   return (
     <li>
+      {isShowing && <SnackBar message="상품이 장바구니에 추가되었습니다." duration={1.5} />}
       <Link href={`/products/${data.id}`}>
         <a>
           <S.Container>
