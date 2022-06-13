@@ -1,16 +1,9 @@
 import { Cart, OrderItemType } from "@/@types/api";
 
 function useCalcCartList(cartList: Cart[]) {
-  const calcSelectedCartIdList = (): number[] => {
-    const cartIdList: number[] = [];
-
-    cartList.forEach((cart) => {
-      if (cart.product.selected) {
-        cartIdList.push(cart.id);
-      }
-    });
-    return cartIdList;
-  };
+  const selectedCartIdList = cartList
+    .filter((cart) => cart.product.selected)
+    .map((cart) => cart.id);
 
   const purchaseList: OrderItemType[] = cartList.map((cart) => {
     return {
@@ -40,7 +33,7 @@ function useCalcCartList(cartList: Cart[]) {
 
   const isSelectedAll = () => {
     if (!isEmpty()) {
-      return cartList.every((cart) => cart.product.selected === true);
+      return cartList.every((cart) => cart.product.selected);
     }
     return false;
   };
@@ -51,7 +44,7 @@ function useCalcCartList(cartList: Cart[]) {
     purchaseList,
     isEmpty: isEmpty(),
     isSelectedAll: isSelectedAll(),
-    selectedCartIdList: calcSelectedCartIdList(),
+    selectedCartIdList,
   };
 }
 
