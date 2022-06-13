@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { dehydrate, QueryClient } from "react-query";
+
 import orderService from "@/services/orderService";
 import OrderDetail from "@/components/OrderDetail";
 

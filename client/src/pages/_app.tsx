@@ -3,6 +3,7 @@ import { ThemeProvider } from "@emotion/react";
 import { QueryClientProvider, QueryClient, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useState } from "react";
+
 import GlobalStyle from "@/styles/GlobalStyle";
 import theme from "@/styles/theme";
 import Layout from "@/components/common/Layout";

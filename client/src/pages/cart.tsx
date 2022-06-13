@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient } from "react-query";
+
 import CartList from "@/components/CartList";
 import cartService from "@/services/cartService";
 

@@ -1,6 +1,7 @@
 import { QueryClient, dehydrate } from "react-query";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
+
 import productService from "@/services/productService";
 import ProductDetail from "@/components/ProductDetail";
 
