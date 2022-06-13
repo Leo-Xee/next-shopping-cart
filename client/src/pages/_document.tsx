@@ -7,6 +7,7 @@ export default function Document() {
         <link rel="shortcut icon" href="/favicon_2021.ico" />
       </Head>
       <body>
+        <div id="portal" />
         <Main />
         <NextScript />
       </body>
