@@ -22,7 +22,7 @@ export const DetailItem = styled.li`
   border-top: 1px solid ${({ theme }) => theme.gray_light};
 `;
 
-export const Anchor = styled.a`
+export const LinkedItem = styled.div`
   display: flex;
   flex: 8;
   cursor: pointer;

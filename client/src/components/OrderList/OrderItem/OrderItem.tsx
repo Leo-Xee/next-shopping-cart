@@ -41,15 +41,17 @@ function OrderItem({ orderItem, type }: OrderItemProps) {
         {orderDetails.map(({ id: productId, name, price, quantity, imageUrl }) => (
           <S.DetailItem key={productId}>
             <Link href={`/products/${productId}`}>
-              <S.Anchor>
-                <Image src={imageUrl} alt={name} height="200px" width="200px" />
-                <S.Info>
-                  <S.Name>{name}</S.Name>
-                  <S.Price>
-                    {filterPrice(price * quantity)} 원 / {quantity} 개
-                  </S.Price>
-                </S.Info>
-              </S.Anchor>
+              <a>
+                <S.LinkedItem>
+                  <Image src={imageUrl} alt={name} height="200px" width="200px" />
+                  <S.Info>
+                    <S.Name aria-label="상품명">{name}</S.Name>
+                    <S.Price>
+                      {filterPrice(price * quantity)} 원 / {quantity} 개
+                    </S.Price>
+                  </S.Info>
+                </S.LinkedItem>
+              </a>
             </Link>
             <S.ButtonWrapper>
               <Button
