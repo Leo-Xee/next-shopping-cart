@@ -86,7 +86,7 @@ server.post("/carts", (req, res) => {
 
   if (targetIdx < 0) {
     db.get("carts")
-      .push({
+      .unshift({
         id: Date.now(),
         product: {
           ...product,
@@ -223,7 +223,7 @@ server.delete("/carts/:cartId", (req, res) => {
     return res.sendStatus(400);
   }
 
-  const result = db.get("carts").splice(targetIdx, 1).write();
+  db.get("carts").splice(targetIdx, 1).write();
 
   res.sendStatus(200);
 });
@@ -273,7 +273,7 @@ server.post("/orders", (req, res) => {
   }
 
   db.get("orders")
-    .push({
+    .unshift({
       id: Date.now(),
       orderDetails,
     })
