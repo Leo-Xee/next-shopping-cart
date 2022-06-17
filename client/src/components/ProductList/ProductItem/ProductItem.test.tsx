@@ -58,7 +58,7 @@ describe("<ProductItem />", () => {
 
     fireEvent.click(cartButton);
 
-    const snackBar = await result.findByText("상품이 장바구니에 추가되었습니다.");
+    const snackBar = await result.findByText(/상품이 장바구니에 추가되었습니다./);
 
     expect(snackBar).toBeInTheDocument();
   });

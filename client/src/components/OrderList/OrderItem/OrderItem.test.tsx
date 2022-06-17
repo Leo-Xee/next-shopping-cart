@@ -73,11 +73,13 @@ describe("<OrderItem />", () => {
   });
 
   it("카트 버튼을 클릭하면 상품 추가 SnackBar를 보여준다.", async () => {
-    const { cartButton, result } = renderOrderItem(order, "list");
+    render(<OrderItem orderItem={order} type="list" />);
+
+    const cartButton = screen.getByRole("button", { name: "장바구니" });
 
     fireEvent.click(cartButton);
 
-    const snackBar = await result.findByText("상품이 장바구니에 추가되었습니다.");
+    const snackBar = await screen.findByText(/상품이 장바구니에 추가되었습니다./);
 
     expect(snackBar).toBeInTheDocument();
   });
