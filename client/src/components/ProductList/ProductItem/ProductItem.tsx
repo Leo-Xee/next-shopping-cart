@@ -9,6 +9,7 @@ import { filterName, filterPrice } from "@/shared/utils/filter";
 import useCartMutation from "@/hooks/apis/useCartMutation";
 import SnackBar from "@/components/common/SnackBar";
 import useSnackBar from "@/hooks/useSnackBar";
+import debounce from "@/shared/utils/debounce";
 
 type ProductItemProps = {
   data: Product;
@@ -18,10 +19,14 @@ function ProductItem({ data }: ProductItemProps) {
   const { isShowing, setIsShowing } = useSnackBar(1.5);
   const { addCart } = useCartMutation();
 
-  const addCartHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const debounceAddCart = debounce(() => {
     addCart(data);
     setIsShowing(true);
+  }, 0.3);
+
+  const addCartHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    debounceAddCart();
   };
 
   return (

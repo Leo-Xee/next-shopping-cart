@@ -9,6 +9,7 @@ import Button from "@/components/common/Button";
 import useCartMutation from "@/hooks/apis/useCartMutation";
 import useSnackBar from "@/hooks/useSnackBar";
 import SnackBar from "@/components/common/SnackBar";
+import debounce from "@/shared/utils/debounce";
 
 type OrderItemProps = {
   orderItem: Order;
@@ -22,9 +23,15 @@ function OrderItem({ orderItem, type }: OrderItemProps) {
 
   const { addCart } = useCartMutation();
 
-  const addCartHandler = (product: Product) => {
+  const debounceAddCart = debounce((product: Product) => {
     addCart(product);
     setIsShowing(true);
+  }, 0.3);
+
+  const addCartHandler = (product: Product) => {
+    if (product) {
+      debounceAddCart(product);
+    }
   };
 
   return (

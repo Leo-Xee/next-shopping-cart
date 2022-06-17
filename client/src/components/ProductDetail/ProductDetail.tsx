@@ -9,34 +9,45 @@ import Button from "../common/Button";
 import useCartMutation from "@/hooks/apis/useCartMutation";
 import useSnackBar from "@/hooks/useSnackBar";
 import SnackBar from "../common/SnackBar";
+import debounce from "@/shared/utils/debounce";
 
 function ProductDetail() {
   const router = useRouter();
   const { productId } = router.query;
   const { isShowing, setIsShowing } = useSnackBar(1.5);
 
-  const { data } = useQuery(["/product", productId], () =>
+  const { data: product } = useQuery(["/product", productId], () =>
     productService.getProduct(String(productId)),
   );
   const { addCart } = useCartMutation();
 
+  const debounceAddCart = debounce(() => {
+    if (product) {
+      addCart(product);
+      setIsShowing(true);
+    }
+  }, 0.3);
+
   const addCartHandler = () => {
-    if (!data) return;
-    addCart(data);
-    setIsShowing(true);
+    debounceAddCart();
   };
 
   return (
     <div>
-      {data && (
+      {product && (
         <S.Container>
-          <Image src={data.imageUrl} alt={data.name} width="500px" height="500px" />
-          <S.Name>{data.name}</S.Name>
+          <Image src={product.imageUrl} alt={product.name} width="500px" height="500px" />
+          <S.Name>{product.name}</S.Name>
           <S.PriceContainer>
             <span>금액</span>
-            <span>{filterPrice(data.price)}원</span>
+            <span>{filterPrice(product.price)}원</span>
           </S.PriceContainer>
-          <Button buttonName="장바구니" colorType="brown" size="full" onClick={addCartHandler} />
+          <Button
+            buttonName="장바구니"
+            colorType="brown"
+            size="full"
+            onClick={() => addCartHandler()}
+          />
         </S.Container>
       )}
       {isShowing && <SnackBar message="상품이 장바구니에 추가되었습니다." duration={1.5} />}
