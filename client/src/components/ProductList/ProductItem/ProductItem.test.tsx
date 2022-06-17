@@ -45,7 +45,6 @@ describe("<ProductItem />", () => {
     });
   });
 
-  // TODO: find how to mock next/link
   it("상품을 클릭하면 상품 상세페이지로 이동한다.", () => {
     render(<ProductItem data={product} />);
 
