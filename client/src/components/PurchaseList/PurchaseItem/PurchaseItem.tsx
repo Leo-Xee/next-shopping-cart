@@ -14,9 +14,9 @@ function PurchaseItem({ cartItem }: PurchaseItemProps) {
     <S.Container>
       <Image src={imageUrl} alt={name} height="200px" width="200px" />
       <S.Info>
-        <S.Name>{name}</S.Name>
+        <S.Name aria-label="상품명">{name}</S.Name>
         <S.Price>
-          {filterPrice(price)} 원 / {quantity} 개
+          {filterPrice(price * quantity)} 원 / {quantity} 개
         </S.Price>
       </S.Info>
     </S.Container>
