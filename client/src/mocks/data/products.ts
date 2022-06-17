@@ -102,7 +102,7 @@ const products: Product[] = [
       "https://cdn-mart.baemin.com/sellergoods/main/f0b493e7-1af8-4320-85a0-1432b320a73b.jpg",
   },
   {
-    id: 15,
+    id: 16,
     name: "페루산 청포도 1kg내외",
     price: 12500,
     imageUrl:
