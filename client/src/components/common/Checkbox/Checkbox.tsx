@@ -14,7 +14,14 @@ function Checkbox({ id, label, checked, disabled, onChange }: CheckboxProps) {
   return (
     <S.Container>
       <S.Label htmlFor={id}>
-        <input id={id} type="checkbox" onChange={onChange} checked={checked} disabled={disabled} />
+        <input
+          id={id}
+          type="checkbox"
+          onChange={onChange}
+          checked={checked}
+          disabled={disabled}
+          aria-label={id}
+        />
         <span />
         <S.Text>{label}</S.Text>
       </S.Label>
