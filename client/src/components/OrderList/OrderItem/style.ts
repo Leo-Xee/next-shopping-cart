@@ -18,13 +18,13 @@ export const Header = styled.div`
 
 export const DetailItem = styled.li`
   display: flex;
+  justify-content: space-between;
   padding: 20px;
   border-top: 1px solid ${({ theme }) => theme.gray_light};
 `;
 
 export const LinkedItem = styled.div`
   display: flex;
-  flex: 8;
   cursor: pointer;
 
   &:hover {
@@ -49,5 +49,4 @@ export const Price = styled.div`
 `;
 export const ButtonWrapper = styled.div`
   width: 200px;
-  flex: 2;
 `;
