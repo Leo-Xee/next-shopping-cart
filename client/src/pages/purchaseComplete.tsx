@@ -35,7 +35,7 @@ function PurchaseCompletePage() {
           onClick={() => router.push("/")}
         />
         <Button
-          buttonName="주문상세"
+          buttonName="주문목록"
           colorType="primary"
           size="full"
           onClick={() => router.push("/orders")}
