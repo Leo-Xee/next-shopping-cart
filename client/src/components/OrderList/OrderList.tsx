@@ -21,7 +21,7 @@ function OrderList() {
       <List>
         {data &&
           data.map((order) => (
-            <li key={order.id}>
+            <li key={order.id} aria-label="주문">
               <OrderItem orderItem={order} type="list" />
             </li>
           ))}
