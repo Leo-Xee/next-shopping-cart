@@ -1,6 +1,6 @@
 import { Product } from "@/@types/api";
 import { filterName, filterPrice } from "@/shared/utils/filter";
-import { render, screen } from "@/shared/utils/test-utils";
+import { fireEvent, render, screen } from "@/shared/utils/test-utils";
 import ProductItem from "./ProductItem";
 
 const product = {
@@ -51,5 +51,15 @@ describe("<ProductItem />", () => {
     const link = screen.getByRole("link");
 
     expect(link).toHaveAttribute("href", `/products/${product.id}`);
+  });
+
+  it("카트 버튼을 클릭하면 '장바구니에 추가 완료' Snackbar를 보여준다.", async () => {
+    const { cartButton, result } = renderProductItem(product);
+
+    fireEvent.click(cartButton);
+
+    const snackBar = await result.findByText("상품이 장바구니에 추가되었습니다.");
+
+    expect(snackBar).toBeInTheDocument();
   });
 });

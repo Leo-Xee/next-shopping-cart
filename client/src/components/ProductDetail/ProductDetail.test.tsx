@@ -1,7 +1,7 @@
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { Product } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
-import { render } from "@/shared/utils/test-utils";
+import { fireEvent, render } from "@/shared/utils/test-utils";
 import ProductDetail from "./ProductDetail";
 import createMockRouter from "@/shared/utils/createMockRouter";
 
@@ -56,5 +56,13 @@ describe("<ProductDetail />", () => {
     });
   });
 
-  it("카트 버튼을 클릭하면 '장바구니에 추가 완료' Snackbar를 보여준다.", () => {}); // request 요청도 담아야하나?
+  it("카트 버튼을 클릭하면 상품 추가 SnackBar를 보여준다.", async () => {
+    const { cartButton, result } = await renderProductDetail(product);
+
+    fireEvent.click(cartButton);
+
+    const snackBar = await result.findByText("상품이 장바구니에 추가되었습니다.");
+
+    expect(snackBar).toBeInTheDocument();
+  });
 });
