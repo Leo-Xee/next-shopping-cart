@@ -28,7 +28,7 @@ function CartList() {
         <S.ListContainer>
           <S.CheckController>
             <Checkbox
-              id="select"
+              id="전체 체크"
               onChange={() => updateSelectedAll(isSelectedAll)}
               checked={isSelectedAll}
               disabled={isEmpty}

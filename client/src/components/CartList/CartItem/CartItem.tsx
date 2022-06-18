@@ -20,7 +20,7 @@ function CartItem({ cartItem }: CartItemProps) {
   return (
     <S.Container>
       <Checkbox
-        id={`check__${name}`}
+        id={`${name} 상품 체크`}
         onChange={() => updateSelected(cartItem)}
         checked={selected}
       />
@@ -41,7 +41,7 @@ function CartItem({ cartItem }: CartItemProps) {
           <BsTrash size={25} />
         </button>
         <S.QuantityContainer>
-          <S.Quantity>{quantity}</S.Quantity>
+          <S.Quantity aria-label={`${name} 수량`}>{quantity}</S.Quantity>
           <S.QuantityCotrollor>
             <button type="button" onClick={() => increseQuantity(cartItem)}>
               +
