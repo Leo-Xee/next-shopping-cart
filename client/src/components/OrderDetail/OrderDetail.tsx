@@ -5,9 +5,15 @@ import styled from "@emotion/styled";
 import orderService from "@/services/orderService";
 import OrderItem from "../OrderList/OrderItem";
 import Indicator from "../Indicator";
+import Title from "../common/Title";
+
+const Conatiner = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
 
 const IndicatorWrapper = styled.div`
-  margin-top: 50px;
   display: flex;
   justify-content: end;
 `;
@@ -23,7 +29,8 @@ function OrderDetail() {
   return (
     <div>
       {data && (
-        <div>
+        <Conatiner>
+          <Title title="주문상세" />
           <OrderItem orderItem={data} type="detail" />
           <IndicatorWrapper>
             <Indicator
@@ -33,7 +40,7 @@ function OrderDetail() {
               width="400px"
             />
           </IndicatorWrapper>
-        </div>
+        </Conatiner>
       )}
     </div>
   );
