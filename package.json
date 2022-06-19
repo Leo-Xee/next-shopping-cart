@@ -4,12 +4,11 @@
   "main": "index.js",
   "type": "commonjs",
   "license": "MIT",
-  "devDependencies": {
-    "json-server": "^0.17.0",
-    "lowdb": "^1.0.0"
-  },
   "scripts": {
     "start": "node server.js"
   },
-  "dependencies": {}
+  "dependencies": {
+    "json-server": "^0.17.0",
+    "lowdb": "^1.0.0"
+  }
 }
