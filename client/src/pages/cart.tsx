@@ -1,14 +1,20 @@
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient } from "react-query";
+import Head from "next/head";
 
 import CartList from "@/components/CartList";
 import cartService from "@/services/cartService";
 
 function CartPage() {
   return (
-    <main>
-      <CartList />
-    </main>
+    <>
+      <Head>
+        <title>WOOWA SHOP | 장바구니</title>
+      </Head>
+      <main>
+        <CartList />
+      </main>
+    </>
   );
 }
 

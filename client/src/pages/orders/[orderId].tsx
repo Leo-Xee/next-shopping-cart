@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { dehydrate, QueryClient } from "react-query";
+import Head from "next/head";
 
 import orderService from "@/services/orderService";
 import OrderDetail from "@/components/OrderDetail";
@@ -11,9 +12,14 @@ interface Params extends ParsedUrlQuery {
 
 function OrderDetailPage() {
   return (
-    <main>
-      <OrderDetail />
-    </main>
+    <>
+      <Head>
+        <title>WOOWA SHOP | 주문상세 </title>
+      </Head>
+      <main>
+        <OrderDetail />
+      </main>
+    </>
   );
 }
 

@@ -1,14 +1,20 @@
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient } from "react-query";
+import Head from "next/head";
 
 import OrderList from "@/components/OrderList";
 import orderService from "@/services/orderService";
 
 function orderListPage() {
   return (
-    <main>
-      <OrderList />
-    </main>
+    <>
+      <Head>
+        <title>WOOWA SHOP | 주문목록</title>
+      </Head>
+      <main>
+        <OrderList />
+      </main>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
-import { QueryClient, dehydrate } from "react-query";
+import { QueryClient, dehydrate, useQuery } from "react-query";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
+import Head from "next/head";
 
 import productService from "@/services/productService";
 import ProductDetail from "@/components/ProductDetail";
@@ -9,11 +10,24 @@ interface Params extends ParsedUrlQuery {
   productId: string;
 }
 
-function ProductDetailPage() {
+type ProductDetailPageProps = {
+  productId: string;
+};
+
+function ProductDetailPage({ productId }: ProductDetailPageProps) {
+  const { data: product } = useQuery(["/product", productId], () =>
+    productService.getProduct(String(productId)),
+  );
+
   return (
-    <main>
-      <ProductDetail />
-    </main>
+    <>
+      <Head>
+        <title>WOOWA SHOP | {product?.name}</title>
+      </Head>
+      <main>
+        <ProductDetail />
+      </main>
+    </>
   );
 }
 
@@ -29,6 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      productId,
     },
   };
 };

@@ -1,14 +1,20 @@
 import { dehydrate, QueryClient } from "react-query";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 import ProductsList from "@/components/ProductList";
 import productService from "@/services/productService";
 
 function HomePage() {
   return (
-    <main>
-      <ProductsList />
-    </main>
+    <>
+      <Head>
+        <title>WOOWA SHOP</title>
+      </Head>
+      <main>
+        <ProductsList />
+      </main>
+    </>
   );
 }
 
