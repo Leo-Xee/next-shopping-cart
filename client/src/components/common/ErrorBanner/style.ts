@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+export const Container = styled.div`
+  padding-top: 100px;
+`;
+
 export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;

@@ -10,6 +10,7 @@ import Indicator from "../Indicator";
 import Button from "../common/Button";
 import Title from "../common/Title/Title";
 import useCartMutation from "@/hooks/apis/useCartMutation";
+import ErrorBanner from "../common/ErrorBanner";
 
 function CartList() {
   const router = useRouter();
@@ -43,9 +44,13 @@ function CartList() {
             />
           </S.CheckController>
           <S.ListHeader>든든배송 상품 ({data?.length || 0}개)</S.ListHeader>
-          <ul>
-            {data && data.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
-          </ul>
+          {data?.length !== 0 ? (
+            <ul>
+              {data && data.map((cartItem) => <CartItem key={cartItem.id} cartItem={cartItem} />)}
+            </ul>
+          ) : (
+            <ErrorBanner type="empty" />
+          )}
         </S.ListContainer>
         <S.IndicatorWrapper>
           <Indicator title="결제예상금액" itemName="총 결제예상금액" itemPrice={totalPrice}>
