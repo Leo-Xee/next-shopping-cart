@@ -284,6 +284,8 @@ server.post("/orders", (req, res) => {
 // default router
 server.use(router);
 
-server.listen(3003, () => {
+const port = process.env.PORT || 4000;
+
+server.listen(port, () => {
   console.log("JSON Server is running");
 });
