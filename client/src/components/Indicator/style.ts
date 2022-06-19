@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const Container = styled.div<{ width: string }>`
   width: ${({ width }) => width};
   border: 1px solid ${({ theme }) => theme.gray_light};
+  background-color: ${({ theme }) => theme.white};
 `;
 
 export const ResultTitle = styled.div`

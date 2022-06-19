@@ -28,7 +28,7 @@ const Container = styled.div<{ duration: number }>`
   align-items: center;
   width: 300px;
   height: 50px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: ${({ theme }) => theme.black};
   border-radius: 8px;
   color: white;
   font-size: 1.8rem;
