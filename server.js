@@ -8,7 +8,12 @@ const middlewares = jsonServer.defaults();
 // cors
 const cors = require("cors");
 
-server.use(cors({ origin: "https://next-shopping-cart-bice.vercel.app" }));
+server.use(
+  cors({
+    origin: "https://next-shopping-cart-bice.vercel.app",
+    methods: "GET,POST,PATCH,DELETE,PUT",
+  })
+);
 
 // lowdb
 const low = require("lowdb");
