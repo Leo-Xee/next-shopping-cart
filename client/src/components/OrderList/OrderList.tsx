@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import orderService from "@/services/orderService";
 import Title from "../common/Title";
 import OrderItem from "./OrderItem";
+import ErrorBanner from "../common/ErrorBanner";
 
 const List = styled.ul`
   padding-top: 40px;
@@ -19,12 +20,15 @@ function OrderList() {
     <>
       <Title title="주문목록" />
       <List>
-        {data &&
-          data.map((order) => (
+        {data?.length !== 0 ? (
+          data?.map((order) => (
             <li key={order.id} aria-label="주문">
               <OrderItem orderItem={order} type="list" />
             </li>
-          ))}
+          ))
+        ) : (
+          <ErrorBanner type="empty" />
+        )}
       </List>
     </>
   );
