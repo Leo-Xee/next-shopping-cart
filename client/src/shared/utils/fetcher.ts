@@ -2,6 +2,7 @@ import axios from "axios";
 import BASE_URL from "@/shared/constant/common";
 
 axios.defaults.baseURL = BASE_URL;
+axios.defaults.withCredentials = true;
 
 const fetcher = async <T>(
   method: "get" | "post" | "patch" | "delete",
