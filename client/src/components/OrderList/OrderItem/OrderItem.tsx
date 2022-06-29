@@ -6,7 +6,7 @@ import { Order, Product } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import Button from "@/components/common/Button";
-import useCartMutation from "@/hooks/apis/useCartMutation";
+import { usePostCart } from "@/hooks/apis/useCartMutation";
 import useSnackBar from "@/hooks/useSnackBar";
 import SnackBar from "@/components/common/SnackBar";
 import debounce from "@/shared/utils/debounce";
@@ -21,10 +21,10 @@ function OrderItem({ orderItem, type }: OrderItemProps) {
   const { id, orderDetails } = orderItem;
   const { isShowing, setIsShowing } = useSnackBar(1.5);
 
-  const { addCart } = useCartMutation();
+  const postCart = usePostCart();
 
   const debounceAddCart = debounce((product: Product) => {
-    addCart(product);
+    postCart.mutate(product);
     setIsShowing(true);
   }, 0.3);
 

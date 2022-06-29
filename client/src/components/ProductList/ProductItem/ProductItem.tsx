@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Product } from "@/@types/api";
 import * as S from "./style";
 import { filterName, filterPrice } from "@/shared/utils/filter";
-import useCartMutation from "@/hooks/apis/useCartMutation";
+import { usePostCart } from "@/hooks/apis/useCartMutation";
 import SnackBar from "@/components/common/SnackBar";
 import useSnackBar from "@/hooks/useSnackBar";
 import debounce from "@/shared/utils/debounce";
@@ -17,10 +17,10 @@ type ProductItemProps = {
 
 function ProductItem({ data }: ProductItemProps) {
   const { isShowing, setIsShowing } = useSnackBar(1.5);
-  const { addCart } = useCartMutation();
+  const postCart = usePostCart();
 
   const debounceAddCart = debounce(() => {
-    addCart(data);
+    postCart.mutate(data);
     setIsShowing(true);
   }, 0.3);
 

@@ -1,23 +1,21 @@
-import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 
 import * as S from "./style";
-import cartService from "@/services/cartService";
 import CartItem from "./CartItem";
 import Checkbox from "../common/Checkbox/Checkbox";
 import useCalcCartList from "@/hooks/useCalcCartList";
 import Indicator from "../Indicator";
 import Button from "../common/Button";
 import Title from "../common/Title/Title";
-import useCartMutation from "@/hooks/apis/useCartMutation";
+import { useDeleteCarts, useGetCarts, usePatchCarts } from "@/hooks/apis/useCartMutation";
 import ErrorBanner from "../common/ErrorBanner";
 
 function CartList() {
   const router = useRouter();
 
-  const { data } = useQuery("/carts", cartService.getCarts);
-  const { updateSelectedAll, deleteSelectedCarts } = useCartMutation();
-
+  const { data } = useGetCarts();
+  const deleteCarts = useDeleteCarts();
+  const patchCarts = usePatchCarts();
   const { totalPrice, totalCount, isEmpty, isSelectedAll, selectedCartIdList } = useCalcCartList(
     data ?? [],
   );
@@ -30,7 +28,7 @@ function CartList() {
           <S.CheckController>
             <Checkbox
               id="전체 체크"
-              onChange={() => updateSelectedAll(isSelectedAll)}
+              onChange={() => patchCarts.mutate(isSelectedAll)}
               checked={isSelectedAll}
               disabled={isEmpty}
               label={isSelectedAll ? "전체 해제" : "전체 선택"}
@@ -39,7 +37,7 @@ function CartList() {
               buttonName="상품 삭제"
               colorType="default"
               size="default"
-              onClick={() => deleteSelectedCarts(selectedCartIdList)}
+              onClick={() => deleteCarts.mutate(selectedCartIdList)}
               disabled={totalCount === 0}
             />
           </S.CheckController>

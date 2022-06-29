@@ -1,56 +1,52 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import cartService from "@/services/cartService";
-import { Cart, Product } from "@/@types/api";
+import { Cart, CartItem, Product } from "@/@types/api";
 
-function useCartMutation() {
+export const useGetCarts = () => {
+  return useQuery("/carts", cartService.getCarts);
+};
+
+export const usePostCart = () => {
+  return useMutation((product: Product) => cartService.addCart(product));
+};
+
+export const usePatchCart = () => {
   const queryClient = useQueryClient();
+  return useMutation(
+    ({ cartId, fieldsToUpdate }: { cartId: number; fieldsToUpdate: Partial<CartItem> }) =>
+      cartService.patchCart(cartId, fieldsToUpdate),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("/carts");
+      },
+    },
+  );
+};
 
-  const option = {
+export const useDeleteCart = () => {
+  const queryClient = useQueryClient();
+  return useMutation((cartItem: Cart) => cartService.deleteCart(cartItem.id), {
     onSuccess: () => {
       queryClient.invalidateQueries("/carts");
     },
-  };
-  const addCartMutation = useMutation((product: Product) => cartService.addCart(product), option);
+  });
+};
 
-  const increseQuantityMutation = useMutation(
-    (cartItem: Cart) => cartService.updateCartQuantity(cartItem.id, cartItem.product.quantity + 1),
-    option,
-  );
+export const useDeleteCarts = () => {
+  const queryClient = useQueryClient();
+  return useMutation((cartIdList: number[]) => cartService.deleteCarts(cartIdList), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("/carts");
+    },
+  });
+};
 
-  const decreseQuantityMutation = useMutation(
-    (cartItem: Cart) => cartService.updateCartQuantity(cartItem.id, cartItem.product.quantity - 1),
-    option,
-  );
-
-  const updateCartSelectedMutation = useMutation(
-    (cartItem: Cart) => cartService.updateCartSelected(cartItem.id, !cartItem.product.selected),
-    option,
-  );
-
-  const deleteCartMutation = useMutation(
-    (cartItem: Cart) => cartService.deleteCart(cartItem.id),
-    option,
-  );
-
-  const deleteSelectedCartsMutation = useMutation(
-    (cartIdList: number[]) => cartService.deleteSelectedCarts(cartIdList),
-    option,
-  );
-
-  const updateSelectedAllMutation = useMutation(
-    (checked: boolean) => cartService.updateSelectedAll(!checked),
-    option,
-  );
-
-  return {
-    addCart: (product: Product) => addCartMutation.mutate(product),
-    increseQuantity: (cartItem: Cart) => increseQuantityMutation.mutate(cartItem),
-    decreseQuantity: (cartItem: Cart) => decreseQuantityMutation.mutate(cartItem),
-    updateSelected: (cartItem: Cart) => updateCartSelectedMutation.mutate(cartItem),
-    updateSelectedAll: (checked: boolean) => updateSelectedAllMutation.mutate(checked),
-    deleteSelectedCarts: (cartIdList: number[]) => deleteSelectedCartsMutation.mutate(cartIdList),
-    deleteCart: (cartItem: Cart) => deleteCartMutation.mutate(cartItem),
-  };
-}
-export default useCartMutation;
+export const usePatchCarts = () => {
+  const queryClient = useQueryClient();
+  return useMutation((checked: boolean) => cartService.patchCarts(!checked), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("/carts");
+    },
+  });
+};

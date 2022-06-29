@@ -6,7 +6,7 @@ import * as S from "./style";
 import { Cart } from "@/@types/api";
 import Checkbox from "@/components/common/Checkbox/Checkbox";
 import { filterPrice } from "@/shared/utils/filter";
-import useCartItemMutation from "@/hooks/apis/useCartMutation";
+import { useDeleteCart, usePatchCart } from "@/hooks/apis/useCartMutation";
 
 type CartItemProps = {
   cartItem: Cart;
@@ -14,14 +14,16 @@ type CartItemProps = {
 
 function CartItem({ cartItem }: CartItemProps) {
   const { id, name, imageUrl, price, quantity, selected } = cartItem.product;
-
-  const { increseQuantity, decreseQuantity, updateSelected, deleteCart } = useCartItemMutation();
+  const patchCart = usePatchCart();
+  const deleteCart = useDeleteCart();
 
   return (
     <S.Container>
       <Checkbox
         id={`${name} 상품 체크`}
-        onChange={() => updateSelected(cartItem)}
+        onChange={() =>
+          patchCart.mutate({ cartId: cartItem.id, fieldsToUpdate: { selected: !selected } })
+        }
         checked={selected}
       />
       <Link href={`/products/${id}`}>
@@ -36,20 +38,33 @@ function CartItem({ cartItem }: CartItemProps) {
         <button
           type="button"
           aria-label={`${name} 상품 삭제하기`}
-          onClick={() => deleteCart(cartItem)}
+          onClick={() => deleteCart.mutate(cartItem)}
         >
           <BsTrash size={25} />
         </button>
         <S.QuantityContainer>
           <S.Quantity aria-label={`${name} 수량`}>{quantity}</S.Quantity>
           <S.QuantityCotrollor>
-            <button type="button" onClick={() => increseQuantity(cartItem)}>
+            <button
+              type="button"
+              onClick={() =>
+                patchCart.mutate({
+                  cartId: cartItem.id,
+                  fieldsToUpdate: { quantity: quantity + 1 },
+                })
+              }
+            >
               +
             </button>
             <button
               type="button"
-              onClick={() => decreseQuantity(cartItem)}
               disabled={quantity <= 1}
+              onClick={() =>
+                patchCart.mutate({
+                  cartId: cartItem.id,
+                  fieldsToUpdate: { quantity: quantity - 1 },
+                })
+              }
             >
               -
             </button>

@@ -6,7 +6,7 @@ import productService from "@/services/productService";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import Button from "../common/Button";
-import useCartMutation from "@/hooks/apis/useCartMutation";
+import { usePostCart } from "@/hooks/apis/useCartMutation";
 import useSnackBar from "@/hooks/useSnackBar";
 import SnackBar from "../common/SnackBar";
 import debounce from "@/shared/utils/debounce";
@@ -19,11 +19,11 @@ function ProductDetail() {
   const { data: product } = useQuery(["/product", productId], () =>
     productService.getProduct(String(productId)),
   );
-  const { addCart } = useCartMutation();
+  const postCart = usePostCart();
 
   const debounceAddCart = debounce(() => {
     if (product) {
-      addCart(product);
+      postCart.mutate(product);
       setIsShowing(true);
     }
   }, 0.3);
