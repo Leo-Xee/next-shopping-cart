@@ -11,11 +11,12 @@ const Container = styled.ul`
 `;
 
 function ProductsList() {
-  const { data } = useGetProducts();
+  const { data: productList } = useGetProducts();
 
   return (
     <Container>
-      {data && data.map((product) => <ProductItem key={product.id} data={product} />)}
+      {productList &&
+        productList.map((product) => <ProductItem key={product.id} productItem={product} />)}
     </Container>
   );
 }

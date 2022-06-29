@@ -12,15 +12,15 @@ import useSnackBar from "@/hooks/useSnackBar";
 import debounce from "@/shared/utils/debounce";
 
 type ProductItemProps = {
-  data: Product;
+  productItem: Product;
 };
 
-function ProductItem({ data }: ProductItemProps) {
+function ProductItem({ productItem }: ProductItemProps) {
   const { isShowing, setIsShowing } = useSnackBar(1.5);
   const postCart = usePostCart();
 
   const debounceAddCart = debounce(() => {
-    postCart.mutate(data);
+    postCart.mutate(productItem);
     setIsShowing(true);
   }, 0.3);
 
@@ -32,18 +32,18 @@ function ProductItem({ data }: ProductItemProps) {
   return (
     <li>
       {isShowing && <SnackBar message="상품이 장바구니에 추가되었습니다." duration={1.5} />}
-      <Link href={`/products/${data.id}`}>
+      <Link href={`/products/${productItem.id}`}>
         <a>
           <S.Container>
-            <Image src={data.imageUrl} alt={data.name} width="282px" height="282px" />
+            <Image src={productItem.imageUrl} alt={productItem.name} width="282px" height="282px" />
             <S.InfoContainer>
               <S.Info>
-                <S.Name className="name">{filterName(data.name)}</S.Name>
-                <S.Price>{filterPrice(data.price)}원</S.Price>
+                <S.Name className="name">{filterName(productItem.name)}</S.Name>
+                <S.Price>{filterPrice(productItem.price)}원</S.Price>
               </S.Info>
               <S.CartButton
                 type="button"
-                aria-label={`${data.name} 장바구니에 담기`}
+                aria-label={`${productItem.name} 장바구니에 담기`}
                 onClick={addCartHandler}
               >
                 <BsCart4 size={30} />

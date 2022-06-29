@@ -11,7 +11,7 @@ const product = {
 };
 
 const renderProductItem = (productItem: Product) => {
-  const result = render(<ProductItem data={productItem} />);
+  const result = render(<ProductItem productItem={productItem} />);
 
   const { id } = productItem;
   const name = result.getByText(filterName(productItem.name));
@@ -46,7 +46,7 @@ describe("<ProductItem />", () => {
   });
 
   it("상품을 클릭하면 상품 상세페이지로 이동한다.", () => {
-    render(<ProductItem data={product} />);
+    render(<ProductItem productItem={product} />);
 
     const link = screen.getByRole("link");
 
