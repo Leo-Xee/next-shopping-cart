@@ -86,8 +86,7 @@ const fetcher = async <T>(
 ### ✅ 장바구니의 주요 기능을 최대한 서버와 동기화
 ![cart](https://user-images.githubusercontent.com/21965795/176478545-de7954ab-b02a-4add-9853-9f7574a505b6.gif)
 
-
-
+장바구니 페이지의 체크 여부, 수량과 같은 상태를 최대한 서버와 동기화해서 사용자가 다양한 기기에서도 하나의 애플리케이션을 사용하는 경험을 할 수 있도록 구현했습니다. 또한 카트에서 체크된 상품이 없을 경우에는 삭제 버튼과 주문하기 버튼을 사용할 수 없다는 것을 시각적으로 보여주기 위해서 스타일에 변화를 주었습니다.
 
 
 ### ✅ Snackbar 구현 및 디바운스 적용
@@ -136,17 +135,11 @@ function useSnackBar(sec: number) {
 }
 ```
 
-
-
-### ✅ MSW, Jest, Testing-library를 사용한 단위테스트
-
-
-
 <br />
 
 ## 🔧 테스트
 
-MSW를 기반으로 API를 모킹하였으며 최대한 TDD를 지키면서 많은 테스트를 작성하려고 노력했습니다.  
+MSW를 기반으로 API를 모킹했으며 Jest, Testing-library를 사용해서 단위테스트를 했고 최대한 많은 테스트를 작성하려고 노력했습니다.  
 그 결과, 총 35개의 테스트 케이스를 작성했고 87%의 기능 테스트 커버리지를 달성했습니다.
 
 <img width="700" alt="Screen Shot 2022-06-19 at 18 32 10" src="https://user-images.githubusercontent.com/21965795/174474660-972d3a17-1305-46ff-8e24-d715e119da44.png">
