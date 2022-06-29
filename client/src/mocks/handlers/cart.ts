@@ -1,11 +1,6 @@
 import { rest } from "msw";
 import BASE_URL from "@/shared/constant/common";
-import {
-  carts,
-  PatchQuantityRequestBody,
-  PatchSelectedRequestBody,
-  PostRequestBody,
-} from "../data/carts";
+import { carts, PatchRequestBody, PatchSelectedRequestBody, PostRequestBody } from "../data/carts";
 
 const cartHandler = [
   /**
@@ -44,45 +39,39 @@ const cartHandler = [
   }),
 
   /**
-   * 전체 카트의 선택여부 변경
+   * 단일 카트의 필드 변경
    */
-  rest.patch<PatchSelectedRequestBody>(`${BASE_URL}/carts/selected`, (req, res, ctx) => {
+  rest.patch<PatchRequestBody>(`${BASE_URL}/carts/:cartId`, (req, res, ctx) => {
+    const { cartId } = req.params;
+    const { selected, quantity } = req.body;
+
+    if (req.body.hasOwnProperty("selected")) {
+      carts.forEach((cart) => {
+        if (cart.id === Number(cartId)) {
+          cart.product.selected = selected;
+        }
+      });
+    }
+
+    if (req.body.hasOwnProperty("quantity")) {
+      carts.forEach((cart) => {
+        if (cart.id === Number(cartId)) {
+          cart.product.quantity = quantity;
+        }
+      });
+    }
+
+    return res(ctx.status(200));
+  }),
+
+  /**
+   * 다수의 필드 변경
+   */
+  rest.patch<PatchSelectedRequestBody>(`${BASE_URL}/carts`, (req, res, ctx) => {
     const { selected } = req.body;
 
     carts.forEach((cart) => {
       cart.product.selected = selected;
-    });
-
-    return res(ctx.status(200));
-  }),
-
-  /**
-   * 단일 카트의 선택여부 변경
-   */
-  rest.patch<PatchSelectedRequestBody>(`${BASE_URL}/carts/:cartId/selected`, (req, res, ctx) => {
-    const { selected } = req.body;
-    const { cartId } = req.params;
-
-    carts.forEach((cart) => {
-      if (cart.id === Number(cartId)) {
-        cart.product.selected = selected;
-      }
-    });
-
-    return res(ctx.status(200));
-  }),
-
-  /**
-   * 단일 카트의 수량 변경
-   */
-  rest.patch<PatchQuantityRequestBody>(`${BASE_URL}/carts/:cartId/quantity`, (req, res, ctx) => {
-    const { cartId } = req.params;
-    const { quantity } = req.body;
-
-    carts.forEach((cart) => {
-      if (cart.id === Number(cartId)) {
-        cart.product.quantity = quantity;
-      }
     });
 
     return res(ctx.status(200));

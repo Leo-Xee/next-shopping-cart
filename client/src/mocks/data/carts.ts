@@ -4,12 +4,13 @@ export type PostRequestBody = {
   product: Product;
 };
 
-export type PatchSelectedRequestBody = {
+export type PatchRequestBody = {
   selected: boolean;
+  quantity: number;
 };
 
-export type PatchQuantityRequestBody = {
-  quantity: number;
+export type PatchSelectedRequestBody = {
+  selected: boolean;
 };
 
 export const carts: Cart[] = [
