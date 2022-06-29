@@ -8,7 +8,7 @@ import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import useCalcCartList from "@/hooks/useCalcCartList";
 import { useDeleteCarts } from "@/hooks/apis/useCartMutation";
-import useOrderMutation from "@/hooks/apis/useOrderMutation";
+import { usePostOrder } from "@/hooks/apis/useOrderMutation";
 import PurchaseItem from "./PurchaseItem";
 import Button from "../common/Button";
 
@@ -19,12 +19,12 @@ function PurchaseList() {
     select: (carts) => carts.filter((cart) => cart.product.selected),
   });
   const deleteCarts = useDeleteCarts();
-  const { addOrder } = useOrderMutation();
+  const postOrder = usePostOrder();
   const { purchaseList, totalPrice, selectedCartIdList } = useCalcCartList(data ?? []);
 
   const orderSelectedCarts = () => {
     deleteCarts.mutate(selectedCartIdList);
-    addOrder(purchaseList);
+    postOrder.mutate(purchaseList);
 
     router.push("/purchaseComplete");
   };

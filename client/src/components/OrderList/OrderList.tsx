@@ -1,10 +1,9 @@
-import { useQuery } from "react-query";
 import styled from "@emotion/styled";
 
-import orderService from "@/services/orderService";
 import Title from "../common/Title";
 import OrderItem from "./OrderItem";
 import ErrorBanner from "../common/ErrorBanner";
+import { useGetOrders } from "@/hooks/apis/useOrderMutation";
 
 const List = styled.ul`
   padding-top: 40px;
@@ -14,7 +13,7 @@ const List = styled.ul`
 `;
 
 function OrderList() {
-  const { data } = useQuery("/orders", orderService.getOrders);
+  const { data } = useGetOrders();
 
   return (
     <>

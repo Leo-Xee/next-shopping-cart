@@ -1,25 +1,21 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import { OrderItemType } from "@/@types/api";
 import orderService from "@/services/orderService";
 
-function useOrderMutation() {
-  const queryClient = useQueryClient();
+export const useGetOrders = () => {
+  return useQuery("/orders", orderService.getOrders);
+};
 
-  const option = {
+export const useGetOrder = (orderId: string) => {
+  return useQuery(["/orders", orderId], () => orderService.getOrder(orderId));
+};
+
+export const usePostOrder = () => {
+  const queryClient = useQueryClient();
+  return useMutation((orderDetails: OrderItemType[]) => orderService.addOrder(orderDetails), {
     onSuccess: () => {
       queryClient.invalidateQueries("/orders");
     },
-  };
-
-  const addOrderMutation = useMutation(
-    (orderDetails: OrderItemType[]) => orderService.addOrder(orderDetails),
-    option,
-  );
-
-  return {
-    addOrder: (orderDetails: OrderItemType[]) => addOrderMutation.mutate(orderDetails),
-  };
-}
-
-export default useOrderMutation;
+  });
+};
