@@ -119,7 +119,7 @@ server.post("/carts", (req, res) => {
 });
 
 /** 전체 카트의 선택여부 변경 */
-server.patch("/carts/selected", (req, res) => {
+server.patch("/carts", (req, res) => {
   const { selected } = req.body;
 
   if (typeof selected !== "boolean") {
@@ -135,14 +135,10 @@ server.patch("/carts/selected", (req, res) => {
   res.sendStatus(200);
 });
 
-/** 단일 카트의 선택여부 변경 */
-server.patch("/carts/:cartId/selected", (req, res) => {
-  const { selected } = req.body;
+// 단일 카트의 필드값 변경
+server.patch("/carts/:cartId", (req, res, ctx) => {
   const { cartId } = req.params;
-
-  if (typeof selected !== "boolean" || !Number(cartId)) {
-    return res.sendStatus(400);
-  }
+  const { selected, quantity } = req.body;
 
   const targetIdx = db
     .get("carts")
@@ -153,44 +149,35 @@ server.patch("/carts/:cartId/selected", (req, res) => {
     return res.sendStatus(400);
   }
 
-  db.get("carts")
-    .forEach((cart, idx) => {
-      if (targetIdx === idx) {
-        cart.product.selected = selected;
-      }
-    })
-    .write();
+  if (req.body.hasOwnProperty("selected")) {
+    if (typeof selected !== "boolean" || !Number(cartId)) {
+      return res.sendStatus(400);
+    }
+    db.get("carts")
+      .forEach((cart, idx) => {
+        if (targetIdx === idx) {
+          cart.product.selected = selected;
+        }
+      })
+      .write();
 
-  res.sendStatus(200);
-});
-
-/** 단일 카트의 수량 변경 */
-server.patch("/carts/:cartId/quantity", (req, res) => {
-  const { cartId } = req.params;
-  const { quantity } = req.body;
-
-  if (!Number(quantity) || !Number(cartId)) {
-    return res.sendStatus(400);
+    res.sendStatus(200);
   }
 
-  const targetIdx = db
-    .get("carts")
-    .findIndex((cart) => cart.id === Number(cartId))
-    .value();
+  if (req.body.hasOwnProperty("quantity")) {
+    if (!Number(quantity) || !Number(cartId)) {
+      return res.sendStatus(400);
+    }
+    db.get("carts")
+      .forEach((cart, idx) => {
+        if (targetIdx === idx) {
+          cart.product.quantity = quantity;
+        }
+      })
+      .write();
 
-  if (targetIdx < 0) {
-    return res.sendStatus(400);
+    res.sendStatus(200);
   }
-
-  db.get("carts")
-    .forEach((cart, idx) => {
-      if (targetIdx === idx) {
-        cart.product.quantity = quantity;
-      }
-    })
-    .write();
-
-  res.sendStatus(200);
 });
 
 /** 다수의 카트 삭제 */
