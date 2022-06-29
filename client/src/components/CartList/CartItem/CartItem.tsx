@@ -6,7 +6,7 @@ import * as S from "./style";
 import { Cart } from "@/@types/api";
 import Checkbox from "@/components/common/Checkbox/Checkbox";
 import { filterPrice } from "@/shared/utils/filter";
-import { useDeleteCart, usePatchCart } from "@/hooks/apis/useCartMutation";
+import { useDeleteCart, usePatchCart } from "@/hooks/queries/cart";
 
 type CartItemProps = {
   cartItem: Cart;

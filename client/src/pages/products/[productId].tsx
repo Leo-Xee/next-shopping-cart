@@ -5,7 +5,7 @@ import Head from "next/head";
 
 import productService from "@/services/productService";
 import ProductDetail from "@/components/ProductDetail";
-import { useGetProduct } from "@/hooks/apis/useProductMutation";
+import { useGetProduct } from "@/hooks/queries/product";
 
 interface Params extends ParsedUrlQuery {
   productId: string;

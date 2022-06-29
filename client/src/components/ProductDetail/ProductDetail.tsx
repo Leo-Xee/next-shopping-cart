@@ -4,11 +4,11 @@ import Image from "next/image";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import Button from "../common/Button";
-import { usePostCart } from "@/hooks/apis/useCartMutation";
+import { usePostCart } from "@/hooks/queries/cart";
 import useSnackBar from "@/hooks/useSnackBar";
 import SnackBar from "../common/SnackBar";
 import debounce from "@/shared/utils/debounce";
-import { useGetProduct } from "@/hooks/apis/useProductMutation";
+import { useGetProduct } from "@/hooks/queries/product";
 
 function ProductDetail() {
   const router = useRouter();

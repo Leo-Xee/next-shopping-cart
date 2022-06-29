@@ -6,7 +6,7 @@ import { Order, Product } from "@/@types/api";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import Button from "@/components/common/Button";
-import { usePostCart } from "@/hooks/apis/useCartMutation";
+import { usePostCart } from "@/hooks/queries/cart";
 import useSnackBar from "@/hooks/useSnackBar";
 import SnackBar from "@/components/common/SnackBar";
 import debounce from "@/shared/utils/debounce";

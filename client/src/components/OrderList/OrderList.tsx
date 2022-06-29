@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Title from "../common/Title";
 import OrderItem from "./OrderItem";
 import ErrorBanner from "../common/ErrorBanner";
-import { useGetOrders } from "@/hooks/apis/useOrderMutation";
+import { useGetOrders } from "@/hooks/queries/order";
 
 const List = styled.ul`
   padding-top: 40px;

@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import OrderItem from "../OrderList/OrderItem";
 import Indicator from "../Indicator";
 import Title from "../common/Title";
-import { useGetOrder } from "@/hooks/apis/useOrderMutation";
+import { useGetOrder } from "@/hooks/queries/order";
 
 const Conatiner = styled.div`
   display: flex;

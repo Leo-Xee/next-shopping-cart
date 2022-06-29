@@ -7,7 +7,7 @@ import useCalcCartList from "@/hooks/useCalcCartList";
 import Indicator from "../Indicator";
 import Button from "../common/Button";
 import Title from "../common/Title/Title";
-import { useDeleteCarts, useGetCarts, usePatchCarts } from "@/hooks/apis/useCartMutation";
+import { useDeleteCarts, useGetCarts, usePatchCarts } from "@/hooks/queries/cart";
 import ErrorBanner from "../common/ErrorBanner";
 
 function CartList() {

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import ProductItem from "./ProductItem";
-import { useGetProducts } from "@/hooks/apis/useProductMutation";
+import { useGetProducts } from "@/hooks/queries/product";
 
 const Container = styled.ul`
   display: flex;
