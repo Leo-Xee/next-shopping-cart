@@ -1,22 +1,21 @@
-import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 
 import Title from "@/components/common/Title";
 import Indicator from "@/components/Indicator";
-import cartService from "@/services/cartService";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import useCalcCartList from "@/hooks/useCalcCartList";
-import { useDeleteCarts } from "@/hooks/apis/useCartMutation";
+import { useDeleteCarts, useGetCarts } from "@/hooks/apis/useCartMutation";
 import { usePostOrder } from "@/hooks/apis/useOrderMutation";
 import PurchaseItem from "./PurchaseItem";
 import Button from "../common/Button";
+import { Cart } from "@/@types/api";
 
 function PurchaseList() {
   const router = useRouter();
 
-  const { data } = useQuery("/carts", cartService.getCarts, {
-    select: (carts) => carts.filter((cart) => cart.product.selected),
+  const { data } = useGetCarts({
+    select: (carts): Cart[] => carts.filter((cart) => cart.product.selected),
   });
   const deleteCarts = useDeleteCarts();
   const postOrder = usePostOrder();

@@ -1,10 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
 
+import { AxiosError } from "axios";
 import cartService from "@/services/cartService";
 import { Cart, CartItem, Product } from "@/@types/api";
 
-export const useGetCarts = () => {
-  return useQuery("/carts", cartService.getCarts);
+export const useGetCarts = (options?: UseQueryOptions<Cart[], AxiosError, Cart[], "/carts">) => {
+  return useQuery("/carts", cartService.getCarts, options);
 };
 
 export const usePostCart = () => {
