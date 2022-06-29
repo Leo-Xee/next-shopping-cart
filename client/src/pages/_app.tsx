@@ -9,9 +9,9 @@ import theme from "@/styles/theme";
 import Layout from "@/components/common/Layout";
 import initMockAPI from "@/mocks";
 
-if (process.env.NODE_ENV === "development") {
-  initMockAPI();
-}
+// if (process.env.NODE_ENV === "development") {
+//   initMockAPI();
+// }
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
