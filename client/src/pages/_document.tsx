@@ -5,6 +5,7 @@ export default function Document() {
     <Html>
       <Head>
         <link rel="shortcut icon" href="/favicon_2021.ico" />
+        <meta name="description" content="WOOWA SHOP에서 다양한 상품들을 구매해보세요~!" />
       </Head>
       <body>
         <div id="portal" />
