@@ -12,11 +12,15 @@ export const usePostCart = () => {
   return useMutation((product: Product) => cartService.addCart(product));
 };
 
+type PatchCartRequest = {
+  cartId: number;
+  fieldsToUpdate: Partial<CartItem>;
+};
+
 export const usePatchCart = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    ({ cartId, fieldsToUpdate }: { cartId: number; fieldsToUpdate: Partial<CartItem> }) =>
-      cartService.patchCart(cartId, fieldsToUpdate),
+    ({ cartId, fieldsToUpdate }: PatchCartRequest) => cartService.patchCart(cartId, fieldsToUpdate),
     {
       onSuccess: () => {
         queryClient.invalidateQueries("/carts");
