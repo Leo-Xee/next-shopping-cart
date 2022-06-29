@@ -53,10 +53,10 @@
 
 ## ⚙️ 주요 내용
 
-### Next 기반의 SSR
+### ✅ Next 기반의 SSR
 도메인의 특성을 고려해서 SEO와 TTV(Time To View)가 중요하다고 생각해 Next.js 프레임워크를 사용해서 SSR로 구현했습니다.
 
-### React-Query를 사용해 서버상태 관리
+### ✅ React-Query를 사용해 서버상태 관리
 장바구니 애플리케이션에서는 클라이언트 상태를 관리할 요소가 따로 없다고 판단했습니다. 그래서 Redux에 미들웨어 붙여서 서버 상태를 관리하기보다는 React-Query로 관리하고 추후에 클라이언트 상태를 관리할 필요성이 생긴다면 Recoil과 같은 클라이언트 상태관리 라이브러리를 사용하는 걸로 결정했습니다. 
 
 또한 API 함수를 최대한 모듈화해서 사용하기 위해서 아래과 같이 fetcher 함수를 구현했고 이를 기반으로 Service 함수와 React-Query 함수를 각각의 디렉토리에서 도메인별로 관리하도록 구성했습니다.
@@ -80,18 +80,67 @@ const fetcher = async <T>(
     throw new Error("different error than axios");
   }
 };
-
-export default fetcher;
 ```
 
 
-### 장바구니의 주요 기능을 최대한 서버와 동기화
+### ✅ 장바구니의 주요 기능을 최대한 서버와 동기화
+![cart](https://user-images.githubusercontent.com/21965795/176478545-de7954ab-b02a-4add-9853-9f7574a505b6.gif)
 
 
-### Snackbar 구현 및 디바운스 적용
 
 
-### MSW, Jest, Testing-library를 사용한 단위테스트
+
+### ✅ Snackbar 구현 및 디바운스 적용
+![snackbar](https://user-images.githubusercontent.com/21965795/176473620-26aabac0-45ce-4f01-b9eb-53d2aac21d8b.gif)
+
+사용자가 상품을 장바구니에 담았다는 피드백을 주기 위해서 SnackBar 컴포넌트와 useSnackBar를 구현해서 사용했습니다.
+
+```ts
+// src/components/common/SnackBar/SnackBar.tsx
+
+function SnackBar({ message, duration }: SnackBarProps) {
+  const [target, setTarget] = useState<Element | null>(null);
+
+  const element = <Container duration={duration}>{message}</Container>;
+
+  useEffect(() => {
+    if (document) {
+      setTarget(document.querySelector("#portal"));
+    }
+  }, []);
+
+  if (!target) return <></>;
+
+  return ReactDOM.createPortal(element, target);
+}
+```
+
+```ts
+// src/hooks/useSnackBar.tsx
+
+function useSnackBar(sec: number) {
+  const [isShowing, setIsShowing] = useState(false);
+  const timer = useRef<Timer>();
+
+  useEffect(() => {
+    if (timer.current) clearTimeout(timer.current);
+    if (isShowing) {
+      timer.current = setTimeout(() => setIsShowing(false), sec * 1000);
+    }
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, [isShowing, sec]);
+
+  return { isShowing, setIsShowing };
+}
+```
+
+
+
+### ✅ MSW, Jest, Testing-library를 사용한 단위테스트
+
+
 
 <br />
 
@@ -100,7 +149,7 @@ export default fetcher;
 MSW를 기반으로 API를 모킹하였으며 최대한 TDD를 지키면서 많은 테스트를 작성하려고 노력했습니다.  
 그 결과, 총 35개의 테스트 케이스를 작성했고 87%의 기능 테스트 커버리지를 달성했습니다.
 
-<img width="860" alt="Screen Shot 2022-06-19 at 18 32 10" src="https://user-images.githubusercontent.com/21965795/174474660-972d3a17-1305-46ff-8e24-d715e119da44.png">
+<img width="700" alt="Screen Shot 2022-06-19 at 18 32 10" src="https://user-images.githubusercontent.com/21965795/174474660-972d3a17-1305-46ff-8e24-d715e119da44.png">
 
 <br />
 
