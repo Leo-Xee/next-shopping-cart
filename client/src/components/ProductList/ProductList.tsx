@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import { useQuery } from "react-query";
 
-import productService from "@/services/productService";
 import ProductItem from "./ProductItem";
+import { useGetProducts } from "@/hooks/apis/useProductMutation";
 
 const Container = styled.ul`
   display: flex;
@@ -12,7 +11,7 @@ const Container = styled.ul`
 `;
 
 function ProductsList() {
-  const { data } = useQuery("/products", productService.getProducts);
+  const { data } = useGetProducts();
 
   return (
     <Container>

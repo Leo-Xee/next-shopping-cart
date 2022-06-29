@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
 import Image from "next/image";
 
-import productService from "@/services/productService";
 import { filterPrice } from "@/shared/utils/filter";
 import * as S from "./style";
 import Button from "../common/Button";
@@ -10,15 +8,14 @@ import { usePostCart } from "@/hooks/apis/useCartMutation";
 import useSnackBar from "@/hooks/useSnackBar";
 import SnackBar from "../common/SnackBar";
 import debounce from "@/shared/utils/debounce";
+import { useGetProduct } from "@/hooks/apis/useProductMutation";
 
 function ProductDetail() {
   const router = useRouter();
   const { productId } = router.query;
   const { isShowing, setIsShowing } = useSnackBar(1.5);
 
-  const { data: product } = useQuery(["/product", productId], () =>
-    productService.getProduct(String(productId)),
-  );
+  const { data: product } = useGetProduct(String(productId));
   const postCart = usePostCart();
 
   const debounceAddCart = debounce(() => {
