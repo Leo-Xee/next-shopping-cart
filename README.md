@@ -139,8 +139,7 @@ function useSnackBar(sec: number) {
 
 ## 🔧 테스트
 
-MSW를 기반으로 API를 모킹했으며 Jest, Testing-library를 사용해서 단위테스트를 했고 최대한 많은 테스트를 작성하려고 노력했습니다.  
-그 결과, 총 35개의 테스트 케이스를 작성했고 87%의 기능 테스트 커버리지를 달성했습니다.
+MSW를 기반으로 API를 모킹했으며 Jest, Testing-library를 사용해서 단위테스트를 했고 최대한 많은 테스트를 작성하려고 노력했습니다. 그 결과, 총 35개의 테스트 케이스를 작성했고 87%의 기능 테스트 커버리지를 달성했습니다.
 
 <img width="700" alt="Screen Shot 2022-06-19 at 18 32 10" src="https://user-images.githubusercontent.com/21965795/174474660-972d3a17-1305-46ff-8e24-d715e119da44.png">
 
