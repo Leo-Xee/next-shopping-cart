@@ -17,88 +17,142 @@
 
 <br />
 
-## ⚙️ 구현 내용
-
-- Next 기반의 SSR
-- React-Query를 사용해 서버상태 관리
-- 장바구니의 주요 기능을 최대한 서버와 동기화
-- 무분별한 요청 방지를 위해 디바운스 적용
-- MSW, Jest, Testing-library를 사용한 단위테스트
-
-<br />
 
 ## 📚 기술 스택
 
-| Typescript | Next.js |  React-Query   |  Emotion   | Jest |  Testing-Library |
-| :--------: | :--------: | :------: | :-----: |:-----: |:-----: |
-|  <img src="https://user-images.githubusercontent.com/21965795/174472604-4e0c144f-4500-4cc6-80b7-3dd29c907171.png" width="100px"/> |  <img src="https://user-images.githubusercontent.com/21965795/174472790-693e1a27-c653-45a6-880d-1cbebbdcf020.png" width="100px" > | <img src="https://user-images.githubusercontent.com/21965795/174472982-dd91c0b0-e6ea-4dfa-bb4a-badf7b3119ae.png" width="100px"/> |<img src="https://user-images.githubusercontent.com/21965795/174472822-309713cb-6730-453c-8bd2-ea071c1176ec.png" width="100px"/>|<img src="https://user-images.githubusercontent.com/21965795/174472830-0a5511cf-3d7b-4d75-a0f8-209325d6d846.png" width="100px"/>|<img src="https://user-images.githubusercontent.com/21965795/174472827-961a87ee-742b-41f5-9fc2-baeae62cc5ae.png" width="100px"/>|
+| Typescript | Next.js |  React-Query   |  Emotion   | 
+| :--------: | :--------: | :------: | :-----: |
+|  <img src="https://user-images.githubusercontent.com/21965795/174472604-4e0c144f-4500-4cc6-80b7-3dd29c907171.png" width="100px"/> |  <img src="https://user-images.githubusercontent.com/21965795/174472790-693e1a27-c653-45a6-880d-1cbebbdcf020.png" width="100px" > | <img src="https://user-images.githubusercontent.com/21965795/174472982-dd91c0b0-e6ea-4dfa-bb4a-badf7b3119ae.png" width="100px"/> |<img src="https://user-images.githubusercontent.com/21965795/174472822-309713cb-6730-453c-8bd2-ea071c1176ec.png" width="100px"/>|
+
+| Jest |  Testing-Library | MSW |
+|:-----: |:-----: |:-----: |
+|<img src="https://user-images.githubusercontent.com/21965795/174472830-0a5511cf-3d7b-4d75-a0f8-209325d6d846.png" width="100px"/>|<img src="https://user-images.githubusercontent.com/21965795/174472827-961a87ee-742b-41f5-9fc2-baeae62cc5ae.png" width="100px"/>|<img src="https://user-images.githubusercontent.com/21965795/176988691-faaab7c1-267c-4cb8-bd3d-1ba63deb4173.png" width="100px"/>|
+
 
 <br />
 
-## 📝 요구 사항
+## 🌲 디렉터리 구조
 
-### **레이아웃**
+```
+├── client
+│   ├── public            // 정적 파일
+│   └── src
+│       ├── @types        // 타입
+│       ├── components    
+│       │   └── common    // 공통 컴포넌트
+│       ├── hooks
+│       │   └── queries   // react-query의 hooks
+│       ├── mocks
+│       │   └── data      // MSW의 mockData
+│       │   └── handlers  // MSW의 handlers
+│       ├── pages
+│       ├── services      // API 함수
+│       ├── shared
+│       │   └── constant  // 공통 상수
+│       │   └── utils     // 공통 함수
+│       └── styles        // 전역 및 테마 스타일
+└── server                // JSON Server
+```
 
-- [x]  베이스 레이아웃의 최상단에는 헤더가 위치하며, 스크롤되어도 고정되어 있다.
-- [x]  나머지 영역은 각 페이지가 표시된다.
-- [x]  각 페이지가 표시되는 영역은 최대 width가 1320px, 최소 width는 768px이다.
+<br />
 
-### **헤더**
+## ⚙️ 주요 내용
 
-- [x]  로고, 장바구니, 주문목록 버튼이 있다.
-- [x]  로고 버튼을 클릭하면, 상품 목록 페이지로 이동한다.
-- [x]  [장바구니] 버튼을 클릭하면, 장바구니 페이지로 이동한다.
-- [x]  [주문목록] 버튼을 클릭하면, 주문 목록 페이지로 이동한다.
+### ✅ Next 기반의 SSR
+도메인의 특성을 고려해서 SEO와 TTV(Time To View)가 중요하다고 생각해 Next.js 프레임워크를 사용해서 SSR로 구현했습니다.
 
-### **상품 목록 페이지**
+### ✅ React-Query를 사용해 서버상태 관리
+장바구니 애플리케이션에서는 클라이언트 상태를 관리할 요소가 따로 없다고 판단했습니다. 그래서 Redux에 미들웨어 붙여서 서버 상태를 관리하기보다는 React-Query로 관리하고 추후에 클라이언트 상태를 관리할 필요성이 생긴다면 Recoil과 같은 클라이언트 상태관리 라이브러리를 사용하는 걸로 결정했습니다. 
 
-- [x]  상품 목록을 조회할 수 있다.
-    - 상품은 한 행에 4개씩 보여준다.
-- [x]  각각의 상품에는 이미지, 이름, 가격, 장바구니 버튼이 표시된다.
-- [x]  [장바구니] 버튼을 클릭하면, 선택한 상품이 장바구니에 들어간다.
-    -  장바구니에 상품을 추가하면 Snackbar로 유저에게 알려준다.
+또한 API 함수를 최대한 모듈화해서 사용하기 위해서 아래과 같이 fetcher 함수를 구현했고 이를 기반으로 Service 함수와 React-Query 함수를 각각의 디렉토리에서 도메인별로 관리하도록 구성했습니다.
 
-### **장바구니 페이지**
+```ts
+// src/shared/utils/fetcher.ts
 
-- [x]  상품 목록 상단에 현재 장바구니에 담긴 상품의 개수를 보여준다.
-- [x]  유저가 장바구니에 담은 상품 목록을 조회할 수 있다.
-    - 장바구니 페이지 최초 진입 시 상품들은 모두 선택되어 있다.
-- [x]  [전체 선택] 버튼 클릭 시 전체 상품을 선택/해제할 수 있다.
-- [x]  상품 목록 왼쪽의 체크박스 클릭 시 상품을 선택/해제할 수 있다.
-- [x]  [선택 상품 삭제] 버튼 클릭 시 선택한 상품들을 한번에 삭제할 수 있다.
-- [x]  상품 목록 오른쪽의 휴지통 버튼 클릭 시 해당 상품을 삭제할 수 있다.
-- [x]  상품 목록 오른쪽에서 상품의 수량을 조정할 수 있다.
-    - 상품 목록 조정 시 금액에 반영되어야 한다.
-- [x]  결제예상금액을 보여준다.
-- [x]  주문하기 버튼을 클릭해 상품을 구매할 수 있다.
+const fetcher = async <T>(
+  method: "get" | "post" | "patch" | "delete",
+  url: string,
+  ...rest: object[]
+) => {
+  try {
+    const { data } = await axios[method]<T>(url, ...rest);
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw error;
+    }
 
-### **주문/결제 페이지**
+    throw new Error("different error than axios");
+  }
+};
+```
 
-- [x]  유저가 주문할 상품들과 전체 수량을 보여준다.
-- [x]  각 주문 상품의 수량을 보여준다.
-- [x]  총 결제금액을 확인할 수 있다.
-- [x]  결제하기 버튼 클릭 시 결제 완료 페이지로 넘어간다.
-- [x]  주문 결제한 상품은 장바구니에서 삭제된다.
 
-### **결제 완료 페이지**
+### ✅ 장바구니의 주요 기능을 최대한 서버와 동기화
+![cart](https://user-images.githubusercontent.com/21965795/176478545-de7954ab-b02a-4add-9853-9f7574a505b6.gif)
 
-- [x]  [홈으로], [주문상세] 버튼이 표시된다.
-- [x]  [홈으로] 버튼 클릭 시 상품 목록 페이지로 이동한다.
-- [x]  [주문상세] 버튼 클릭 시 주문 목록 페이지로 이동한다.
+장바구니 페이지의 체크 여부, 수량과 같은 상태를 최대한 서버와 동기화해서 사용자가 다양한 기기에서도 하나의 애플리케이션을 사용하는 경험을 할 수 있도록 구현했습니다. 또한 카트에서 체크된 상품이 없을 경우에는 삭제 버튼과 주문하기 버튼을 사용할 수 없다는 것을 시각적으로 보여주기 위해서 스타일에 변화를 주었습니다.
 
-### **주문 목록 페이지**
 
-- [x]  유저의 주문 내역 목록을 조회할 수 있다.
-- [x]  각 상품 우측의 [장바구니] 버튼 클릭 시 해당 상품이 다시 장바구니에 담긴다.
+### ✅ Snackbar 구현 및 디바운스 적용
+![snackbar](https://user-images.githubusercontent.com/21965795/176473620-26aabac0-45ce-4f01-b9eb-53d2aac21d8b.gif)
+
+사용자가 상품을 장바구니에 담았다는 피드백을 주기 위해서 SnackBar 컴포넌트와 useSnackBar를 구현해서 사용했습니다.
+
+```ts
+// src/components/common/SnackBar/SnackBar.tsx
+
+function SnackBar({ message, duration }: SnackBarProps) {
+  const [target, setTarget] = useState<Element | null>(null);
+
+  const element = <Container duration={duration}>{message}</Container>;
+
+  useEffect(() => {
+    if (document) {
+      setTarget(document.querySelector("#portal"));
+    }
+  }, []);
+
+  if (!target) return <></>;
+
+  return ReactDOM.createPortal(element, target);
+}
+```
+
+```ts
+// src/hooks/useSnackBar.tsx
+
+function useSnackBar(sec: number) {
+  const [isShowing, setIsShowing] = useState(false);
+  const timer = useRef<Timer>();
+
+  useEffect(() => {
+    if (timer.current) clearTimeout(timer.current);
+    if (isShowing) {
+      timer.current = setTimeout(() => setIsShowing(false), sec * 1000);
+    }
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, [isShowing, sec]);
+
+  return { isShowing, setIsShowing };
+}
+```
 
 <br />
 
 ## 🔧 테스트
 
-MSW를 기반으로 API를 모킹하였으며 최대한 TDD를 지키면서 많은 테스트를 작성하려고 노력했습니다.  
-그 결과, 총 35개의 테스트 케이스를 작성했고 87%의 기능 테스트 커버리지를 달성했습니다.
+MSW를 기반으로 API를 모킹했으며 Jest, Testing-library를 사용해서 단위테스트를 했고 최대한 많은 테스트를 작성하려고 노력했습니다. 그 결과, 총 35개의 테스트 케이스를 작성했고 87%의 기능 테스트 커버리지를 달성했습니다.
 
-<img width="860" alt="Screen Shot 2022-06-19 at 18 32 10" src="https://user-images.githubusercontent.com/21965795/174474660-972d3a17-1305-46ff-8e24-d715e119da44.png">
+<img width="700" alt="Screen Shot 2022-06-19 at 18 32 10" src="https://user-images.githubusercontent.com/21965795/174474660-972d3a17-1305-46ff-8e24-d715e119da44.png">
+
+<br />
+
+## 🎨 LightHouse 측정
+
+![Screen Shot 2022-06-29 at 22 35 03](https://user-images.githubusercontent.com/21965795/176449624-4e3771f0-1e27-47f0-afab-7d9578041330.png)
 
 <br />
 
