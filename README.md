@@ -20,9 +20,14 @@
 
 ## 📚 기술 스택
 
-| Typescript | Next.js |  React-Query   |  Emotion   | Jest |  Testing-Library |
-| :--------: | :--------: | :------: | :-----: |:-----: |:-----: |
-|  <img src="https://user-images.githubusercontent.com/21965795/174472604-4e0c144f-4500-4cc6-80b7-3dd29c907171.png" width="100px"/> |  <img src="https://user-images.githubusercontent.com/21965795/174472790-693e1a27-c653-45a6-880d-1cbebbdcf020.png" width="100px" > | <img src="https://user-images.githubusercontent.com/21965795/174472982-dd91c0b0-e6ea-4dfa-bb4a-badf7b3119ae.png" width="100px"/> |<img src="https://user-images.githubusercontent.com/21965795/174472822-309713cb-6730-453c-8bd2-ea071c1176ec.png" width="100px"/>|<img src="https://user-images.githubusercontent.com/21965795/174472830-0a5511cf-3d7b-4d75-a0f8-209325d6d846.png" width="100px"/>|<img src="https://user-images.githubusercontent.com/21965795/174472827-961a87ee-742b-41f5-9fc2-baeae62cc5ae.png" width="100px"/>|
+| Typescript | Next.js |  React-Query   |  Emotion   | 
+| :--------: | :--------: | :------: | :-----: |
+|  <img src="https://user-images.githubusercontent.com/21965795/174472604-4e0c144f-4500-4cc6-80b7-3dd29c907171.png" width="100px"/> |  <img src="https://user-images.githubusercontent.com/21965795/174472790-693e1a27-c653-45a6-880d-1cbebbdcf020.png" width="100px" > | <img src="https://user-images.githubusercontent.com/21965795/174472982-dd91c0b0-e6ea-4dfa-bb4a-badf7b3119ae.png" width="100px"/> |<img src="https://user-images.githubusercontent.com/21965795/174472822-309713cb-6730-453c-8bd2-ea071c1176ec.png" width="100px"/>|
+
+| Jest |  Testing-Library | MSW |
+|:-----: |:-----: |:-----: |
+|<img src="https://user-images.githubusercontent.com/21965795/174472830-0a5511cf-3d7b-4d75-a0f8-209325d6d846.png" width="100px"/>|<img src="https://user-images.githubusercontent.com/21965795/174472827-961a87ee-742b-41f5-9fc2-baeae62cc5ae.png" width="100px"/>|<img src="https://user-images.githubusercontent.com/21965795/176988691-faaab7c1-267c-4cb8-bd3d-1ba63deb4173.png" width="100px"/>|
+
 
 <br />
 
