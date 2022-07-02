@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 import { BsCart4 } from "react-icons/bs";
 
 import * as S from "./style";
@@ -28,4 +29,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default React.memo(Header);
