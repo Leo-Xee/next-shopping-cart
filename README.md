@@ -9,7 +9,7 @@
 <img width="1600" alt="next-shopping-cart" src="https://user-images.githubusercontent.com/21965795/174474785-8b6f221e-23ed-4390-b58e-52809265538b.png">
 
 
-## 🔥 소개 ( [Demo](https://next-shopping-cart-bice.vercel.app/) )
+## 🔥 소개
 
 **장바구니 애플리케이션은 상품을 확인하고 장바구니에 담은 뒤 결제 해볼 수 있는 데스크탑 애플리케이션입니다.**
 
